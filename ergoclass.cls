@@ -120,7 +120,7 @@
 \renewcommand{\@maketitle}{%
   \newpage
   \null
-  \vskip .6in%					% This length determines how far down the page the title block starts
+  \vskip .55in%					% This length determines how far down the page the title block starts
   \begin{flushleft}%
 %  \let \footnote \thanks%			% Ergo does not use the \thanks footnote for acknowledgements.
 \list{}{\setlength\leftmargin{0in}\setlength\rightmargin{1in}}
@@ -176,7 +176,7 @@
 \fancypagestyle{plain}{%
 \fancyhf{} 
 %\fancyhead[L]{Ergo: An Open Access Journal of Philosophy}
-\fancyhead[L]{\raisebox{-.5in}[0pt][0pt]\ergo}			% The raisebox value determines the placement 
+\fancyhead[L]{\raisebox{-.55in}[0pt][0pt]\ergo}			% The raisebox value determines the placement 
 \fancyfoot[R]{\thepage}							% although this is also affected by headsep in the
 \fancyfoot[L]{\@doi}							% geometry package
 \renewcommand{\headrulewidth}{0pt}
@@ -206,7 +206,7 @@
 }
 
 %% Font sizes
-\renewcommand\normalsize{\@setfontsize\normalsize{11pt}{14pt}}		% body text, subsubsection headings, 
+\renewcommand\normalsize{\@setfontsize\normalsize{10.5pt}{13pt}}		% body text, subsubsection headings, 
 												% figure captions, figure text, author and affiliation
 												% header and footer text (easily changed).
 \renewcommand\tiny{\@setfontsize\tiny{5.5pt}{6pt}}				% small logo font
@@ -214,8 +214,8 @@
 \renewcommand\footnotesize{\@setfontsize\footnotesize{9pt}{10pt}}		% footnotes
 \renewcommand\small{\@setfontsize\small{9pt}{11pt}}				% abstract (easily changed - defined in this class)
 \renewcommand\large{\@setfontsize\large{11.5pt}{12pt}}				% subsection headings
-\renewcommand\Large{\@setfontsize\Large{12.5pt}{14pt}}			% section headings
-\renewcommand\LARGE{\@setfontsize\LARGE{20pt}{24pt}}			% title
+\renewcommand\Large{\@setfontsize\Large{12pt}{14pt}}			% section headings
+\renewcommand\LARGE{\@setfontsize\LARGE{18pt}{22pt}}			% title
 %\renewcommand\huge{\@setfontsize\huge{30pt}{30pt}}				%
 %\renewcommand\Huge{\@setfontsize\Huge{20pt}{20pt}}			% the article class does not use any of the
 												% huge fonts
