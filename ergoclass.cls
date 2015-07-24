@@ -143,7 +143,7 @@
     %{\large \@date}%
   \end{flushleft}%
   \par
-  \vskip 1.5em}						% This determines the space between the affiliation and the abstract
+  \vskip 2em}						% This determines the space between the affiliation and the abstract
 
 %% This redefines the abstract environment to look how we want
 \renewenvironment{abstract}
@@ -212,7 +212,7 @@
 \renewcommand\tiny{\@setfontsize\tiny{5.5pt}{6pt}}				% small logo font
 \renewcommand\scriptsize{\@setfontsize\scriptsize{7pt}{8.5pt}}			% nothing? (NB: Ripley's paper uses this command)
 \renewcommand\footnotesize{\@setfontsize\footnotesize{9pt}{10pt}}		% footnotes
-\renewcommand\small{\@setfontsize\small{9pt}{10pt}}				% abstract (easily changed - defined in this class)
+\renewcommand\small{\@setfontsize\small{9pt}{12.5pt}}				% abstract (easily changed - defined in this class)
 \renewcommand\large{\@setfontsize\large{11.5pt}{12pt}}				% subsection headings
 \renewcommand\Large{\@setfontsize\Large{12pt}{14pt}}			% section headings
 \renewcommand\LARGE{\@setfontsize\LARGE{18pt}{22pt}}			% title
