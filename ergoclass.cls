@@ -153,8 +153,9 @@
   }
   \item\relax
   \small}							% The font size category is determined here, although what that size is is determined below
- {\par\normalsize\endlist}					% This line returns the font size to normal
-
+ {\par\normalsize\endlist\vskip 1em}				% This line returns the font size to normal and
+								% determines the spacing between the abstract and
+								% the beginning of the body text
 % This sizes the line above the footnotes
 \renewcommand{\footnoterule}{%			
   \kern -3pt
@@ -206,13 +207,13 @@
 }
 
 %% Font sizes
-\renewcommand\normalsize{\@setfontsize\normalsize{10.5pt}{13pt}}		% body text, subsubsection headings, 
-												% figure captions, figure text, author and affiliation
-												% header and footer text (easily changed).
+\renewcommand\normalsize{\@setfontsize\normalsize{10.5pt}{13pt}}	% body text, subsubsection headings, 
+									% figure captions, figure text, author and affiliation
+									% header and footer text (easily changed).
 \renewcommand\tiny{\@setfontsize\tiny{5.5pt}{6pt}}				% small logo font
 \renewcommand\scriptsize{\@setfontsize\scriptsize{7pt}{8.5pt}}			% nothing? (NB: Ripley's paper uses this command)
 \renewcommand\footnotesize{\@setfontsize\footnotesize{9pt}{10pt}}		% footnotes
-\renewcommand\small{\@setfontsize\small{9pt}{12.5pt}}				% abstract (easily changed - defined in this class)
+\renewcommand\small{\@setfontsize\small{9pt}{13pt}}				% abstract (easily changed - defined in this class)
 \renewcommand\large{\@setfontsize\large{11.5pt}{12pt}}				% subsection headings
 \renewcommand\Large{\@setfontsize\Large{12pt}{14pt}}			% section headings
 \renewcommand\LARGE{\@setfontsize\LARGE{18pt}{22pt}}			% title
