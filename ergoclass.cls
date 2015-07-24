@@ -143,7 +143,7 @@
     %{\large \@date}%
   \end{flushleft}%
   \par
-  \vskip 2em}						% This determines the space between the affiliation and the abstract
+  \vskip 2.5em}						% This determines the space between the affiliation and the abstract
 
 %% This redefines the abstract environment to look how we want
 \renewenvironment{abstract}
@@ -176,9 +176,9 @@
 \fancypagestyle{plain}{%
 \fancyhf{} 
 %\fancyhead[L]{Ergo: An Open Access Journal of Philosophy}
-\fancyhead[L]{\raisebox{-.45in}[0pt][0pt]\ergo}			% The raisebox value determines the placement 
-\fancyfoot[R]{\thepage}							% although this is also affected by headsep in the
-\fancyfoot[L]{\@doi}							% geometry package
+\fancyhead[L]{\raisebox{-.425in}[0pt][0pt]\ergo}		% The raisebox value determines the placement of the logo,
+\fancyfoot[R]{\thepage}						% although this is also affected by headsep in the
+\fancyfoot[L]{\@doi}						% geometry package
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}}
 
