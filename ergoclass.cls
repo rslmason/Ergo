@@ -176,7 +176,7 @@
 \fancypagestyle{plain}{%
 \fancyhf{} 
 %\fancyhead[L]{Ergo: An Open Access Journal of Philosophy}
-\fancyhead[L]{\raisebox{-.55in}[0pt][0pt]\ergo}			% The raisebox value determines the placement 
+\fancyhead[L]{\raisebox{-.45in}[0pt][0pt]\ergo}			% The raisebox value determines the placement 
 \fancyfoot[R]{\thepage}							% although this is also affected by headsep in the
 \fancyfoot[L]{\@doi}							% geometry package
 \renewcommand{\headrulewidth}{0pt}
@@ -212,7 +212,7 @@
 \renewcommand\tiny{\@setfontsize\tiny{5.5pt}{6pt}}				% small logo font
 \renewcommand\scriptsize{\@setfontsize\scriptsize{7pt}{8.5pt}}			% nothing? (NB: Ripley's paper uses this command)
 \renewcommand\footnotesize{\@setfontsize\footnotesize{9pt}{10pt}}		% footnotes
-\renewcommand\small{\@setfontsize\small{9pt}{11pt}}				% abstract (easily changed - defined in this class)
+\renewcommand\small{\@setfontsize\small{9pt}{10pt}}				% abstract (easily changed - defined in this class)
 \renewcommand\large{\@setfontsize\large{11.5pt}{12pt}}				% subsection headings
 \renewcommand\Large{\@setfontsize\Large{12pt}{14pt}}			% section headings
 \renewcommand\LARGE{\@setfontsize\LARGE{18pt}{22pt}}			% title
