@@ -1,0 +1,1141 @@
+\documentclass{ergoclass}
+
+%% Preamble from the original .tex file %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{bussproofs}
+\usepackage{amssymb}
+\EnableBpAbbreviations
+\def\fCenter{:}                              
+\newcommand{\sqq}[2]{\ensuremath{#1  \mathrel{:}  #2}}
+\newcommand{\SQQ}[2]{\ensuremath{#1 \;\vdash\; #2}}
+\newcommand{\rall}[3]{\ensuremath{#1[#2/#3]}}
+\newcommand{\set}[2]{\ensuremath{\{#1 : #2\}}}
+\newcommand{\tuple}[1]{\ensuremath{\langle #1 \rangle}}
+\newcommand{\Tname}[1]{\T\name{#1}}
+\newcommand{\name}[1]{\ensuremath{\langle #1 \rangle}}
+\newcommand{\amexists}{\ensuremath{\exists}}
+\newcommand{\amforall}{\ensuremath{\forall}}
+\newcommand{\amcond}{\ensuremath{\rightarrow}}
+\newcommand{\amor}{\vee}
+\newcommand{\amand}{\ensuremath{\wedge}}
+\newcommand{\mcond}{\ensuremath{\multimap}}
+\newcommand{\mor}{\ensuremath{\oplus}}
+\newcommand{\mand}{\ensuremath{\otimes}}
+\newcommand{\acond}{\ensuremath{\sqsupset}}
+\newcommand{\aor}{\ensuremath{\sqcup}}
+\newcommand{\aand}{\ensuremath{\sqcap}}
+\newcommand{\T}{\ensuremath{T}}
+\newcommand{\D}{\Delta}
+%\renewcommand{\D}{\Delta}
+\newcommand{\G}{\Gamma}
+\newcommand{\vcurry}{\ensuremath{\nu}}
+\newcommand{\curry}{\ensuremath{\kappa}}
+\newcommand{\liar}{\ensuremath{\lambda}}
+\newcommand{\hs}{\hskip 5mm}
+\newcommand{\vs}{\vskip 5mm}
+\newcommand{\BIx}[2]{\BinaryInf$ #1 \fCenter #2$}
+\newcommand{\UIx}[2]{\UnaryInf$ #1 \fCenter #2$}
+\newcommand{\AXx}[2]{\Axiom$ #1 \fCenter #2$}
+\newcommand{\LLl}[1]{\LeftLabel{\scriptsize #1:\quad}}
+%\usepackage{float}
+%\floatstyle{boxed}
+%\restylefloat{figure}
+\newcommand{\ruq}[3]{\ensuremath{[#2(#1)/#3(#1)]}}
+\newcommand{\nclog}{{\sc nc}}
+\newcommand{\ntlog}{{\sc nt}}
+\sloppy
+
+\usepackage[authoryear]{natbib}					%RM1
+\renewcommand{\cite}{\citet}						%RM1	These will get included in the class, now.
+\setcitestyle{citesep={,},aysep={},notesep={:~},yysep={;}}  	%RM1
+
+\title{Comparing Substructural Theories of Truth}
+\author{David Ripley}
+%\date{}
+
+%% Preamble details added for the purposes of the class.
+\affiliation{University of Connecticut}
+\contact{davewripley@gmail.com}
+\contact{}
+\doi{http://dx.doi.org/10.3998/ergo.12405314.0002.013}
+\volumeissueyear{2}{13}{2015}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Substructural theories of truth are theories based on logics that do not include the full
+complement of usual structural rules. Existing substructural approaches fall into two
+main families: noncontractive approaches and nontransitive approaches. This paper
+provides a sketch of these families, and argues for two claims: first, that substructural
+theories are better-positioned
+than other theories to grapple with the truth-theoretic
+paradoxes, and second---more
+tentatively---that
+nontransitive approaches are in turn
+better-positioned
+than noncontractive approaches.
+\end{abstract}
+
+\section{Introduction}
+
+This paper provides a sketch of two different logical approaches to truth-theoretic paradoxes. The approaches I will consider here both succeed in accommodating a fully transparent truth predicate---one that allows substitution of $\Tname{A}$ for $A$ anywhere, for any sentence $A$---by restricting the application of certain so-called {\em structural rules}. As such, they work with what are known as substructural logics.
+
+The structural rules that have come in for the most suspicion in this context are the rules of {\em contraction}. These rules allow a premise or conclusion to be used an unlimited number of times if it can be used once. Approaches to paradox based on restricting the rules of contraction have been explored in a number of places, for example \cite{bm:2curry, grishin:pstclwc, petersen:lwciua, restall:lwc, shapiro:dlc}, and \cite{zardini:twc}.
+
+Another rule that has been added to the list of suspects is the rule of {\em cut}, embodying a generalized notion of transitivity of consequence. Approaches to paradox based on restricting the rule of cut have been explored in, for example, \citet*{cervr:rtt, ripley:pafc}, and \cite{weir:ntsl}.
+
+I have two main goals here. The first is to explain the logical ideas behind both a noncontractive and a nontransitive approach to transparent truth, and to argue that these two approaches, appropriately developed, share desirable features beyond what is possible for other approaches to transparent truth. The second is to consider a variety of arguments that might help decide between our two protagonists; I will tentatively conclude that the nontransitive approach seems more promising.
+
+It goes like this: in \S\ref{2logics}, I present the logics that will be with us throughout the paper: a noncontractive logic \nclog, and a nontransitive logic \ntlog. These include a transparent truth predicate. In \S\ref{whysub}, I address my first goal, arguing that these logics have noteworthy advantages over other approaches to transparent truth. In \S\ref{howsub}, I turn to my second goal, and explore some differences between these approaches. \S\ref{conclusion} concludes.
+
+
+\section{Two Substructural Logics} \label{2logics}
+
+This section uses a common sequent-calculus framework to present the two approaches. For concreteness, I choose a single way to develop each of the noncontractive and nontransitive approaches, rather than attempting to do justice to the many variations represented in the literature. The representatives I've chosen exhibit important features common to their respective approaches, but it is perhaps important to remember that they are only representatives, and that different authors prefer logical approaches that modify the present approaches in various ways.
+
+\subsection{Structural Rules} \label{structrules}
+
+In this paper, I'll work with sequent calculi to present the logics in question, since this kind of presentation allows for an easy focus on the structural properties of a logic, which will be my main topic here.
+
+A sequent is something of the form $\sqq{\Gamma}{\Delta}$, where $\Gamma$ and $\Delta$ are multisets of formulas. A multiset is like a set, and unlike a list, in that it doesn't care what order its members occur in: $\tuple{A, B, A}$ is a different list from $\tuple{A, A, B}$, but $[A, B, A]$ is the same multiset as $[A, A, B]$. However, a multiset is like a list, and unlike a set, in that it {\em does} care how many times each member occurs: $[A, A, B]$ is a different multiset from $[A, B]$, but $\{A, A, B\}$ is the same set as $\{A, B\}$. I will assume that each multiset has only finitely many members, each of which occurs only finitely many times. Sequents stand in for arguments; $\Gamma$ comprises the {\em premises} of the sequent, and $\Delta$ its {\em conclusions}.
+
+A sequent calculus gives us rules for deriving sequents, and each calculus determines a set of derivable sequents, which I'll call the {\em consequence relation} determined by the calculus. These rules come in two varieties: operational and structural. An {\em operational} rule is one involving certain specific vocabulary; I'll introduce a number of them later.
+
+Structural rules, on the other hand, don't involve any specific vocabulary. They apply to any formulas, independent of the shape of those formulas. There are four main structural rules I'll consider here. Two of them I will hold totally innocent;\footnote{Weakening is surely not {\em totally} innocent when it comes to paradoxes; see \cite{grishin:pstclwc} for a demonstration that weakening plus extensionality can cause havoc in naive set theory, even without contraction. However, weakening is not known to cause similar problems for naive truth theory, since there does not seem to be an obvious analog to extensionality. (But see \citealt{restall:adnct} for a possible such analog.) 
+
+Identity is, if anything, even {\em more} suspect; it will play a crucial role in every paradox to follow. But I'll let it slide here.} I'll present them first. Both logics to be considered in this paper include these rules without restriction:
+\begin{description}
+\item[Identity:] \AXC{} \LLl{Id} \UIC{\sqq{A}{A}} \DP
+\item[Weakening:] \AXx{\G}{\D} \LLl{K} \UIx{\G, \G'}{\D, \D'} \DP
+\end{description}
+Identity allows us to derive $\sqq{A}{A}$ from nowhere, for any $A$; it guarantees a reflexive consequence relation. (It's often considered an axiom scheme rather than a rule; I'll count it as a zero-premise rule for uniformity.) Weakening allows us to add whatever premises or conclusions we like to any sequent we've derived, and ensures that our consequence relations will be monotonic.\footnote{Two other familiar structural rules---associativity and exchange---are implicitly enforced by using {\em multisets} in the sequents, because multisets do not register any differences in order or associative structure. But these rules seem mostly harmless in the present context (although see \citealt{slaney:rwx} for potential worries about exchange).}
+
+The remaining structural rules are the ones that seem to be playing suspicious roles in the trouble for naive\ truth and other semantic properties:\footnote{As I mentioned above, identity is crucially involved as well. Systems based on restricting identity have a number of commonalities with the systems to be discussed here, but enough differences as well that I will leave them to one side.}
+\begin{description}
+\item[Contraction:] 
+\AXx{\G, A, A}{\D} \LLl{WL} \UIx{\G, A}{\D} \DP \hs
+\AXx{\G}{A, A, \D} \LLl{WR} \UIx{\G}{A, \D} \DP
+\item[Cut:]
+\AXx{\G}{A, \D} \AXx{\G', A}{\D'} 
+\BIx{\G, \G'}{\D, \D'} \DP
+\end{description}
+
+Contraction allows us to move from a sequent that uses a formula twice as a premise or a conclusion to the corresponding sequent that uses it only once. In the presence of contraction (together with certain special cases of weakening), we can replace multisets with ordinary sets in our sequents. Since much of this paper will consider the effects of dropping contraction, though, I'll stick with multisets throughout this paper, even when contraction is in force.
+
+Cut allows us to combine derivations in a certain way: if we can derive $A$ as a premise in a certain context, and $A$ as a conclusion in a certain context, then we can put those contexts together without $A$, and derive the result. This is a generalization of {\em transitivity}: when cut holds, the resulting logic is transitive. (Starting from the premise-sequents $\sqq{B}{A}$ and $\sqq{A}{C}$, an application of cut yields the conclusion-sequent $\sqq{B}{C}$.) The substructural logics to be considered in this paper are logics in which one of these rules is allowed to fail.
+
+Moreover, this is the only difference between the two approaches to be considered. Structurally, the logic \nclog\ includes identity, weakening, and cut, but not contraction; while the logic \ntlog\ includes identity, weakening, and contraction, but not cut. 
+
+\subsection{Operational Rules}
+
+Our target logics have more than just structural rules, of course. There are also {\em operational rules}, rules that govern particular bits of vocabulary.  \nclog\ and \ntlog\ include the very same operational rules. I'll keep it relatively simple here and focus on the usual suspects: negation, conjunction, disjunction, implication, and universal and particular quantification. Even with this restricted scope, though, there's a lot going on.
+
+There are a variety of different ways to specify a connective like conjunction, and in the present context it's important to be careful about the differences. We might use rules like these, taken from the calculus G1c of \cite{ts:bpt}. (Here and throughout, when two formulas occur in parentheses in the premise sequent of the specification of the rule, the rule can be validly applied with {\em either} (but just one!) of those formulas in the indicated place):
+
+
+\medskip
+{\centering
+\AXx{\G, (A), (B)}{\D}
+\LLl{$\aand$L}
+\UIx{\G, A \aand B}{\D}
+\DP
+\hs
+\AXx{\G}{A, \D}
+\AXx{\G}{B, \D}
+\LLl{$\aand$R}
+\BIx{\G}{A \aand B, \D}
+\DP
+
+}
+\medskip
+
+\noindent On the other hand, we might use rules like these:
+
+
+\medskip
+{\centering
+\AXx{\G, A, B}{\D}
+\LLl{$\mand$L}
+\UIx{\G, A \mand B}{\D}
+\DP
+\hs
+\AXx{\G}{A, \D}
+\AXx{\G'}{B, \D'}
+\LLl{$\mand$R}
+\BIx{\G, \G'}{A \mand B, \D, \D'}
+\DP
+
+}
+\medskip
+
+Both $\aand$ and $\mand$ are recognizably conjunction-like. Moreover, in the presence of both contraction and weakening, it's possible to show that a connective defined by the $\aand$ rules will also obey the $\mand$ rules, and vice versa; in fact, any such connective would exhibit exactly the behaviour of classical conjunction. See Figure \ref{interderiv} for the derivations.\footnote{In deriving the effects of $\aand$R for $\mand$, I add $^\star$ to the name of a rule to indicate that it might have to be iterated some number of times (including 0). In this case, it might take many applications of WL to contract $\G, \G$ to $\G$, and of WR to contract $\D, \D$ to $\D$, since $\G$ or $\D$ might have many members. Alternately, $\G$ or $\D$ might be empty, in which case no applications at all of WL or WR (respectively) are needed.} (These derivations depend {\em only} on weakening and contraction; none of the other structural rules are needed.) So in any system that includes both weakening and contraction, there is usually very little reason to distinguish these two connectives, and indeed we usually do not, just thinking of them/it as {\em conjunction}.
+
+\begin{figure}
+
+
+\begin{center}
+\AXx{\G, (A), (B)}{\D}
+\LLl{K}
+\UIx{\G, A, B}{\D}
+\LLl{$\mand$L}
+\UIx{\G, A \mand B}{\D}
+\DP
+\hs
+\AXx{\G}{A, \D}
+\AXx{\G}{B, \D}
+\LLl{$\mand$R}
+\BIx{\G, \G}{A \mand B, \D, \D}
+\LLl{WL$^\star$, WR$^\star$}
+\UIx{\G}{A \mand B, \D}
+\DP
+\vs
+\AXx{\G, A, B}{\D}
+\LLl{$\aand$L}
+\UIx{\G, A, A \aand B}{\D}
+\LLl{$\aand$L}
+\UIx{\G, A \aand B, A \aand B}{\D}
+\LLl{WL}
+\UIx{\G, A \aand B}{\D}
+\DP
+\hs
+\AXx{\G}{A, \D}
+\LLl{K}
+\UIx{\G, \G'}{A, \D, \D'}
+\AXx{\G'}{B, \D'}
+\LLl{K}
+\UIx{\G, \G'}{B, \D, \D'}
+\LLl{$\aand$R}
+\BIx{\G, \G'}{A \aand B, \D, \D'}
+\DP
+
+\end{center}
+
+
+\caption{Using W and K to collapse $\aand$ and $\mand$.}
+\label{interderiv}
+\end{figure}
+
+
+
+Without contraction, though, this collapse is not possible, and $\aand$ and $\mand$ exhibit different logical behaviour. For example, $\sqq{A}{A \aand A}$ is derivable, but $\sqq{A}{A \mand A}$ is not. Since much of this paper will be concerned with \nclog, in which contraction fails, it will be important to distinguish $\aand$ from $\mand$. These connectives are sometimes called {\em additive} and {\em multiplicative} conjunction, respectively, and these are the terms I'll use for them here. 
+
+It is not just conjunction that bifurcates in the absence of contraction, however. There are additive and multiplicative versions of disjunction and implication as well. Moreover, there is a good case to be made (as in \citealt{paoli:aq}) % rmedit
+that the quantifiers ought to also bifurcate into additive and multiplicative versions, although there is no widely accepted way to do this---in particular, there is no widely accepted way to handle multiplicative quantification. (The usual quantifier rules are very much additive in their approach.)\footnote{\cite{zardini:twc} offers a plausible approach to multiplicative quantification that fits well with some suggestive remarks in \cite{paoli:aq}, but I will not assume that Zardini's (or any other) is the final story. One striking worry is that Zardini's rules are not even {\em sound} for the classical counterparts of the quantifiers he characterizes; but the rules for multiplicative conjunction, disjunction, and implication are all sound for the classical counterparts of these connectives. See also \cite{montagna:somq} and \cite{op:lbi}.} I will here only use one form (the additive form) of each quantifier, then. Negation survives unsplit as well.\footnote{$\neg A$ can sometimes be understood as $A \to \bot$, for some conditional $\to$ and some falsum constant $\bot$. I won't explore the situation around propositional constants here; but they too undergo an additive/multiplicative split. Between the conditional and the falsum, then, this yields {\em four} options for a negation. The negation rules used here result in the same behaviour as the fully-multiplicative version; I won't consider the other three options, as they are less discussed. (But not {\em un}discussed: for example, 
+%
+%\cite{priest:ic, beall:sot}'s `arrow-falsum' connective can be seen as a negation built from a {\em multiplicative}
+the `arrow-falsum' connective discussed in \cite{priest:ic} and \cite{beall:sot} can be seen as a negation built from a {\em multiplicative} % rmedit
+%
+conditional and an {\em additive} falsum constant, albeit in different settings from the present one.)} Figure \ref{unsplitrules} gives operational rules for negation and the quantifiers; operational rules for the remaining additive connectives are given in Figure \ref{addrules};\footnote{In Figure \ref{addrules}, $A(t)$ is a formula with an indicated term $t$; $A(x)$ is then that formula with all free occurrences of $t$ (if any) replaced with some variable $x$. $a$ must be an {\em eigenvariable}: a variable that does not occur free anywhere in the conclusion sequent.} and operational rules for the remaining multiplicative connectives are given in Figure \ref{multrules}.
+
+\begin{figure}
+
+
+\begin{center}
+\AXx{\G}{A, \D}
+\LLl{$\neg$L}
+\UIx{\G, \neg A}{\D}
+\DP
+\hs
+\AXx{\G, A}{\D}
+\LLl{$\neg$R}
+\UIx{\G}{\neg A, \D}
+\DP
+\vs
+\AXx{\G, A(t)}{\D}
+\LLl{$\forall$L}
+\UIx{\G, \forall x A(x)}{\D}
+\DP
+\hs
+\AXx{\G}{A(a), \D}
+\LLl{$\forall$R}
+\UIx{\G}{\forall x A(x), \D}
+\DP
+\vs
+\AXx{\G, A(a)}{\D}
+\LLl{$\exists$L}
+\UIx{\G, \exists x A(x)}{\D}
+\DP
+\hs
+\AXx{\G}{A(t), \D}
+\LLl{$\exists$R}
+\UIx{\G}{\exists x A(x), \D}
+\DP
+
+\end{center}
+
+\caption{Rules for unsplit vocabulary.}
+\label{unsplitrules}
+\end{figure}
+
+
+\begin{figure}
+
+
+\begin{center}
+\AXx{\G, A}{\D}
+\AXx{\G, B}{\D}
+\LLl{$\aor$L}
+\BIx{\G, A \aor B}{\D}
+\DP
+\hs
+\AXx{\G}{(A), (B), \D}
+\LLl{$\aor$R}
+\UIx{\G}{A \aor B, \D}
+\DP
+\vs
+\AXx{\G}{A, \D}
+\AXx{\G, B}{\D}
+\LLl{$\acond$L}
+\BIx{\G, A \acond B}{\D}
+\DP
+\hs
+\AXx{\G, (A)}{(B), \D}
+\LLl{$\acond$R}
+\UIx{\G}{A \acond B, \D}
+\DP
+\end{center}
+
+
+
+\caption{Rules for additive vocabulary}
+\label{addrules}
+\end{figure}
+
+\begin{figure}
+
+
+
+\begin{center}
+\AXx{\G, A}{\D}
+\AXx{\G', B}{\D'}
+\LLl{$\mor$L}
+\BIx{\G, \G', A \mor B}{\D, \D'}
+\DP
+\hs
+\AXx{\G}{A, B, \D}
+\LLl{$\mor$R}
+\UIx{\G}{A \mor B, \D}
+\DP
+\vs
+\AXx{\G}{A, \D}
+\AXx{\G', B}{\D'}
+\LLl{$\mcond$L}
+\BIx{\G, \G', A \mcond B}{\D, \D'}
+\DP
+\hs
+\AXx{\G, A}{B, \D}
+\LLl{$\mcond$R}
+\UIx{\G}{A \mcond B, \D}
+\DP
+\end{center}
+
+\caption{Rules for multiplicative vocabulary.}
+\label{multrules}
+\end{figure}
+
+Just as in the case of conjunction, multiplicative and additive versions of disjunction and implication collapse with each other in the presence of both weakening and contraction. As a result, although the distinction between additive and multiplicative connectives is important for understanding the noncontractive approach, it is not important at all for understanding the nontransitive approach, which allows for both weakening and contraction.
+
+It will also help to have general vocabulary, for use when the distinction between additive and multiplicative connectives does not matter, or to make general claims about conjunctions, disjunctions, etc., when the general claims don't depend on the difference between additive and multiplicative. It's for this purpose that I've reserved more familiar logical notation; I'll use $\amand$ for conjunction ($\aand$ and $\mand$), $\amor$ for disjunction ($\aor$ and $\mor$), and $\amcond$ for implication ($\acond$ and $\mcond$).
+
+Both \nclog\ and \ntlog\ include this full complement of operational rules, including negation, the quantifiers, and additive and multiplicative versions of the remaining vocabulary. In practice, however, the difference between additive and multiplicative vocabulary never ramifies in \ntlog, owing to the presence of contraction, so I will stick to the general vocabulary in discussing \ntlog.
+
+Note that, in developing a philosophically-motivated noncontractive approach, it is open to each theorist whether to use additive vocabulary, to use multiplicative vocabulary, to pick and choose some of each, or to use the whole lot of it. Depending on theoretical goals, this decision can become interesting. For my purposes here, though, I'm using \nclog, in which all this vocabulary is in play; this has the disadvantage of using a lot of different symbols, but it has the advantage of not burying too much offstage.\footnote{In places, I will discuss particular noncontractive theorists, but I will only mention their choice of vocabulary when it's relevant to my immediate point. Don't assume, then, that all these theorists want all of this vocabulary. Note too, as mentioned above, that multiplicative quantifiers are an exception to this policy; they {\em will} stay offstage here.}
+
+
+\subsection{Adding Naive Truth} \label{naivetruth}
+
+I'll consider only one way of adding naive truth---adding the following two truth rules (here, $\T$ is the truth predicate, and $\name{A}$ is some canonical name of $A$):
+
+\begin{center}
+\AXx{\Gamma, A}{\Delta}
+\LLl{$\T$L}
+\UIx{\Gamma, \Tname{A}}{\Delta}
+\DP
+\hs
+\AXx{\Gamma}{A, \Delta}
+\LLl{$\T$R}
+\UIx{\Gamma}{\Tname{A}, \Delta}
+\DP
+\end{center}
+With these rules added, we now have complete presentations of both \nclog\ and \ntlog. \nclog\ includes every rule examined so far other than contraction; \ntlog\ includes every rule examined so far other than cut.
+
+Both \nclog\ and \ntlog\ exhibit full transparency; one can replace $A$ with $\Tname{A}$ or vice versa in any sequent as many times as one likes, where $A$ appears isolated or as a subformula, without affecting derivability of that sequent. Transparent truth leads to paradoxes, and paradoxes sometimes cause trouble. For example, consider a liar sentence \liar\ that is $\neg \Tname{\liar}$; that is, a sentence that says that it itself is not true. In the presence of the negation rules, the truth rules, identity, contraction, and cut, we can derive the empty sequent as follows:\footnote{NB: in each subproof, the application of a truth rule moves from an occurrence of $\neg \Tname{\liar}$ to an occurrence of $\Tname{\neg \Tname{\liar}}$---that is, to an occurrence of $\Tname{\liar}$.}
+
+\begin{prooftree}
+\AXx{\Tname{\liar}}{\Tname{\liar}}
+\LLl{$\neg$R}
+\UIx{}{\Tname{\liar}, \neg \Tname{\liar}}
+\LLl{$\T$R}
+\UIx{}{\Tname{\liar}, \Tname{\liar}}
+\LLl{WR}
+\UIx{}{\Tname{\liar}}
+
+\AXx{\Tname{\liar}}{\Tname{\liar}}
+\LLl{$\neg$L}
+\UIx{\Tname{\liar}, \neg \Tname{\liar}}{}
+\LLl{$\T$L}
+\UIx{\Tname{\liar}, \Tname{\liar}}{}
+\LLl{WL}
+\UIx{\Tname{\liar}}{}
+
+\LLl{Cut}
+\BIx{\phantom{\name{}}}{\phantom{\name{}}}
+\end{prooftree}
+
+Deriving the empty sequent is bad news; in the presence of weakening it means that any sequent whatever is derivable. All arguments would be valid if this derivation were to go through. Of course, this derivation is not legitimate in either \nclog\ or \ntlog, as it relies on both contraction and cut, and neither logic includes both of those rules.
+
+Safety from one derivation is not a guarantee that there won't be trouble elsewhere. However, these systems are in fact known to be safe for the truth rules; there is no derivation of the empty sequent in either of these systems.\footnote{For relatives of \ntlog, see \cite{ripley:pafc} and \cite{cervr:rtt}. For relatives of \nclog, see \cite{restall:lwc} and \cite{zardini:twc}.}
+
+\section{Why Go Substructural?} \label{whysub}
+
+There are a number of features that these substructural approaches have in common. Many of these are features that other approaches to transparent truth cannot share. The purpose of this section is to present and discuss some of the main advantages of the substructural point of view; these advantages are had in common by both of the logics considered in this paper.
+
+\subsection{Preserving Operational Rules}
+
+The first main advantage accruing to substructural approaches is their ability to maintain, without restriction, the operational rules governing each piece of familiar logical vocabulary. As we've already seen, in the presence of identity, contraction, cut, and transparent truth, the negation rules suffice to cause mayhem, via the liar paradox. The conditional rules do as well; consider the following derivation, involving a curry sentence \curry\ that is $\Tname{\curry} \mcond \bot$:
+\begin{prooftree}
+\AXx{\Tname{\curry}}{\Tname{\curry}}
+\AXx{\bot}{\bot}
+\LLl{$\mcond$L}
+\BIx{\Tname{\curry}, \Tname{\curry} \mcond \bot}{\bot}
+\LLl{$\T$L}
+\UIx{\Tname{\curry}, \Tname{\curry}}{\bot}
+\LLl{WL}
+\UIx{\Tname{\curry}}{\bot}
+\LLl{$\mcond$R}
+\UIx{}{\Tname{\curry} \mcond \bot}
+\LLl{$\T$R}
+\UIx{}{\Tname{\curry}}
+
+\AXx{\Tname{\curry}}{\Tname{\curry}}
+\AXx{\bot}{\bot}
+\LLl{$\mcond$L}
+\BIx{\Tname{\curry}, \Tname{\curry} \mcond \bot}{\bot}
+\LLl{$\T$L}
+\UIx{\Tname{\curry}, \Tname{\curry}}{\bot}
+\LLl{WL}
+\UIx{\Tname{\curry}}{\bot}
+
+\LLl{Cut}
+\BIx{}{\bot}
+\end{prooftree}
+We haven't quite derived the empty sequent, but $\sqq{}{\bot}$ is bad enough; let $\bot$ be something completely unacceptable---it turns out to be a theorem! Again, though, our substructural logics are safe, even with the full rules for $\mcond$; there is no derivation of $\sqq{}{\bot}$ in these systems either.
+
+Things are not so simple for nonsubstructural approaches to transparent truth. Such an approach {\em must} handle the liar paradox by modifying the negation rules somehow; that's the only remaining degree of freedom. But such a modification has nothing to say about the curry paradox, where negation is not involved. Similarly, they must handle the curry paradox by modifying the conditional rules; but this says nothing about the liar.
+
+This leads to two problems. First, it opens the nonsubstructuralist to a familiar charge, pressed in \cite{quine:pl, slater:pl}: the charge that they are not really addressing the paradoxes at all, but only changing the subject. After all, so the objection has it, the liar paradox we originally cared about is the one formulated with a connective $\neg$ {\em obeying} the negation rules. A connective that doesn't obey the negation rules simply isn't that same connective, no matter what symbol we use to write it. The same argument can be pressed about implication.
+
+I don't want to put too much weight on that objection (although I do think there might be something to it); it's one that nonsubstructuralists have generally recognized as deserving an answer, and there are well-explored ways to answer it (for an example, see \citealt[Chs.\ 4--5]{priest:dttbal}). 
+
+The real problem with having to modify the operational rules, it seems to me, is a different one entirely. It is this: the nonsubstructuralist deals with the paradoxes piecemeal, missing the general features that are allowing them to arise in the first place. But paradox runs deeper than any particular vocabulary. Tinkering with negation or conditional rules might prevent paradoxes involving negations and conditionals from arising, but it doesn't come to grips with the general phenomenon. Two examples will reinforce this impression. 
+
+\subsubsection{Validity Curry}
+
+The first comes from {\em validity curry}. I'll follow the presentation of \cite{bm:2curry}, although  see \cite{pr:ps, shapiro:dlc}, and \cite{ms:vtp} for related discussion. In this paper, Beall and Murzi consider adding a validity predicate $V$ to the object language, obeying the following two rules:
+\begin{center}
+\AXC{\phantom{\sqq{A}{B}}}
+\UIx{A, V(\name{A}, \name{B})}{B}
+\DP
+\hs
+\AXx{A}{B}
+\UIx{}{V(\name{A}, \name{B})}
+\DP
+\end{center}
+These two plausible rules are enough to derive $\sqq{}{\bot}$, given a sentence \vcurry\ that is $V(\name{\vcurry}, \name{\bot})$, along with the $V$ rules, cut, and contraction. (Slight tweaks to the curry derivation above will show how it's done.) The nonsubstructuralist, then, must modify the $V$ rules, using yet another finger to plug yet another hole in the crumbling dike. After all, no negation {\em or} implication occurs in the validity curry argument, so the nonsubstructuralist's tweaks to negation and implication are beside the point here. The substructuralist, on the other hand, has already addressed this problem, since it too depends on both contraction and cut to cause trouble. 
+
+Moreover, since the substructuralist can accept these $V$ rules along with the usual rules for the conditional, they can derive every instance of the plausible claim that valid arguments are truth-preserving. That is, they can give the following derivation for arbitrary $A, B$:
+
+\vs
+
+{\centering
+\AXx{A, V(\name{A}, \name{B})}{B}
+\LLl{$\T$L, $\T$R}
+\UIx{\Tname{A}, V(\name{A}, \name{B})}{\Tname{B}}
+\LLl{$\mcond$R}
+\UIx{V(\name{A}, \name{B})}{\Tname{A} \mcond \Tname{B}}
+\LLl{$\mcond$R}
+\UIx{}{V(\name{A}, \name{B}) \mcond (\Tname{A} \mcond \Tname{B})}
+\DP
+
+}
+\vs
+This derivation is available in both \nclog\ and \ntlog, since it depends only on the truth rules and the $\mcond$R rule. Contraction and cut are not involved. These approaches thus avoid the argument in \cite[p.\ 284--286]{field:stp} against the claim that valid arguments are truth-preserving, as this argument starts from the failure of the above derivation; this failure is indeed forced on nonsubstructuralists, but not on the substructural approaches considered here.
+
+
+\subsubsection{Hinnion-Libert Paradox}
+
+Even if the nonsubstructuralist accepts this consequence of modifying the validity rules, however, they are still not out of the woods, as an example provided by \cite{restall:adnct} shows. Restall works in a naive set theory to develop a paradox developed in a different context in \cite{hl:pae}.
+
+Using none of the operational rules we've seen so far, this paradox causes the same old trouble. The necessary resources are identity, contraction, cut, and the following four additional rules:\footnote{Restall uses sets rather than multisets of premises and conclusions in his sequents, which masks the role of contraction. But contraction is indeed necessary to run his argument in the present setting.}
+
+
+
+\begin{center}
+\AXx{\G, A(t)}{\D}
+\LLl{=L}
+\UIx{\G, t = u, A(u)}{\D}
+\DP
+\vs
+\AXx{\G, A(t)}{\D}
+\LLl{$\in$L}
+\UIx{\G, t \in \set{x}{A(x)}}{\D}
+\DP
+\hs
+\AXx{\G}{A(t), \D}
+\LLl{$\in$R}
+\UIx{\G}{t \in \set{x}{A(x)}, \D}
+\DP
+\vs
+\AXx{\G, a \in t}{a \in u, \D}
+\AXx{\G', a \in u}{a \in t, \D'}
+\LLl{Ext}
+\BIx{\G, \G'}{t = u, \D, \D'}
+\DP
+\end{center}
+
+
+The first of these rules captures part of the expected behaviour of $=$: when drawn on as a premise, it allows substitution of one term for another in a premise. The second and third rules capture part of the expected behaviour of set membership in a naive set theory: the claim that $t$ is a member of the set of $A$s can stand in for the claim that $t$ is $A$, either as a premise or a conclusion. The final rule ensures that the naive theory is a naive theory of {\em sets}, by allowing us to derive the claim that $t = u$ from $t$ and $u$ having the same members.\footnote{Restall uses a slightly different version of Ext, in which $\G$ and $\D$ must match $\G'$ and $\D'$, and in which there is only one occurrence of each of $\G$, $\D$ in the conclusion-sequent. That is, he uses an {\em additive} extensionality rule, while I've given a {\em multiplicative} one here. Either suffices for paradox, but the multiplicative version might be more congenial to those who reject contraction. The difference doesn't matter for our purposes here.}
+
+From these resources, consideration of the set $\set{x}{\set{y}{x \in x} = \set{z}{\bot}}$ allows for a derivation of $\sqq{}{\bot}$. (I won't reproduce the derivation here; it's in \citealt{restall:adnct}.) This paradox is in many ways just like a familiar (biconditional) curry paradox. But since it uses no conditionals and no negations, nonsubstructural approaches to paradox must deal with it separately yet again, faulting (at least) one of the four additional rules. Of course they are welcome to do so; but we can be forgiven for starting to think they are missing the point. When each new paradox must be blocked separately, it certainly gives the appearance of missing a general phenomenon.
+
+Although I have presented the point so far as an argument against nonsubstructural approaches that {\em preserve} transparent truth, it is equally forceful against approaches to the truth-based paradoxes that work by {\em giving up} transparent truth, such as those explored in \cite{halbach:att, maudlin:tp} and \cite{scharp:rt}. After all, neither validity curry nor the Hinnion-Libert paradox (nor any of the more familiar set-theoretic paradoxes) has anything at all to do with truth; playing with our theory of truth may address the liar and curry paradoxes, but it too misses the broader phenomenon. 
+
+Substructuralist approaches take a different tack entirely, and one that gets at the root of the trouble. By blocking either contraction or cut in their approach to the liar, the substructural approaches described here have {\em already} blocked the problematic derivations from validity curry or the Hinnion-Libert set.\footnote{I don't know of an explicit treatment of Restall's argument by a noncontractivist, but it's easy to see how it would go: the paradox relies crucially on contraction. For development of a naive set theory in Restall's mold that avoids triviality by going nontransitive, see \cite{ripley:nstntl}.} There is no need for any additional work.
+
+Rather than rushing from paradox to paradox making ad hoc modifications, these substructural approaches grapple with the paradoxes where they live: in the basic features of argumentation. This way, they can avoid having to worry about rules governing particular pieces of vocabulary; in a single fell swoop they address liars, curries, validity curries, Hinnion-Liberts, and so on.
+
+\subsection{Restricted Universal Quantification} \label{ruq}
+
+The substructuralists' ability to maintain familiar operational rules confers another noteworthy advantage on substructural approaches: their easy and natural treatment of restricted universal quantification (henceforth, RUQ). We'd like some way to formalize claims of the form `All $A$s are $B$s'. One familiar way to do this is to use the formula $\amforall x (Ax \amcond Bx)$. So long as $\amforall$ and $\amcond$ obey something like the usual operational rules, this works more or less as well as it always did (although see \S\ref{choosing} for more discussion). 
+
+But recall that nonsubstructural approaches cannot retain the rules governing $\amcond$, on pain of curry paradox. Accordingly, their account of RUQ is forced to be nonstandard as well.
+
+I'll use $\rall{}{A}{B}$ as a noncommittal way to formulate `All $A$s are $B$s'. Given this, one way to look at the problem is as follows. There are a number of logical properties we'd like restricted quantification to have. Here are three:
+\begin{itemize}
+\item $\SQQ{}{\rall{}{A}{A}}$
+\item $\SQQ{At, \rall{}{A}{B}}{Bt}$
+\item $\rall{}{A}{B} \dashv \vdash \neg \amexists x (Ax \amand \neg Bx)$
+\end{itemize}
+That is: all $A$s are $A$s, and this should be a theorem. 
+It should follow from $At$ and the claim that all $A$s are $B$s that $Bt$. Finally, the claim that all $A$s are $B$s should entail and be entailed by the claim that there is nothing which is $A$ and not $B$. Very few approaches to naive truth can yield all three of these. The kicker is the final one, which ties $\rall{}{A}{B}$ to the theory of negation. By tinkering with their theory of negation, nonsubstructural approaches invariably end up somewhere that violates one of the three principles above. If they keep RUQ tied to negation via the third principle, they lose one of the others; paracomplete approaches like those in \cite{brady:ul} and \cite{field:stp} lose the first, and paraconsistentist approaches like those in \cite{priest:ic} and \cite{beall:sot} lose the second.
+
+In an attempt to hang on to the first and second principles, nonsubstructuralists might devise some alternate theory of RUQ. (For an attempt at this, see \citealt*{rrq}.) However, such an alternate theory invariably violates the third principle above, and often comes with its own additional troubles. For example, the theories developed in \cite{rrq} and \cite{beall:atrrq} fail to validate RUQ contraposition ($\sqq{\rall{}{A}{B}}{\rall{}{\neg B}{\neg A}}$) and vacuous quantification ($\sqq{\neg \exists x A(x)}{\rall{}{A}{B}}$). Moreover, this is not an accidental failure: these principles are deliberately avoided, as they would lead to triviality in the resulting system.
+
+
+
+
+
+Substructural theorists, on the other hand, have none of these difficulties with RUQ. \ntlog\ validates all of the above desiderata directly. In \nclog, the situation is more textured, as there are two different ways to understand $\amforall x (Ax \amcond Bx)$, depending on how $\amcond$ is read. Both of these ways validate the second principle, and the one involving $\mcond$ validates the first.\footnote{The one involving $\acond$ gives the weaker $\vdash \rall{}{A}{A}, \rall{}{A}{A}$.} The third principle takes on more ambiguity, as $\amand$ must also be disambiguated. But so long as $\amcond$ and $\amand$ match (are both additive or both multiplicative), then the third principle too is validated.
+
+
+
+Substructural approaches, then, can continue to understand $\rall{}{A}{B}$ as $\amforall x (Ax \amcond Bx)$; both \nclog\ and \ntlog\ validate all three of the above principles (in the case of \nclog, given appropriate disambiguation), and avoid the other problematic consequences mentioned above. 
+
+
+
+
+\section{Choosing a Substructural Logic} \label{choosing} \label{howsub}
+
+Substructural approaches thus provide a promising avenue for addressing the paradoxes of truth, validity, and cognate notions. But nontransitive and noncontractive approaches differ from each other in important ways. This section will explore some of these differences, considering arguments that proponents of each of our logics might use against each other. I will tentatively conclude that the nontransitive approach is in better shape overall.
+
+
+\subsection{Classical Logic}
+
+Classical logic has got some things going for it. Among other things, it is simple, powerful, and time-tested. For at least some purposes, it would be nice to be able to use classical logic, to get some of these advantages.\footnote{Classical logic, of course, has been legitimately and persuasively questioned for many reasons that {\em don't} involve truth or the kinds of paradoxes at issue here; see \citet*{ent1, rlr1, dummett:lbom, tennant:arl}, and \cite{bp:sa} for some examples. I won't consider these objections to classical logic here, as they would take me too far afield, but surely they are important in forming a full picture.}
+Here we find what is probably the most striking difference between the two approaches; at least some of the other differences to be pointed to below depend on this one. 
+
+Every classically-valid argument is valid in \ntlog, no matter whether the classical connectives are understood as additive, multiplicative, or any combination of these; this holds for the full language, including arguments involving the transparent truth predicate. This gives a sufficient condition for \ntlog\ validity that is easy to work with; it is a sufficient condition I'll lean on repeatedly in what follows. (It is only a sufficient condition, and not also necessary, because \ntlog\ includes the naive truth rules, and so validates arguments like $\sqq{\Tname{A}}{A}$ that are not valid in plain classical logic.) This is possible because the rule of cut is {\em admissible} in the presentation of classical logic that underlies \ntlog. That is, any argument that can be shown to be classically valid by using the rule of cut can also be shown to be classically valid without using the rule. Since no argument depends on cut for its classical validity, all classically-valid arguments remain valid even when cut is dropped. (For more details, see \citealt{ripley:pafc}; \citeyear{ripley:ru}.) 
+
+The same is not true of noncontractive systems. For example, the sequents $\sqq{A}{A \mand A}$ and $\sqq{A \mor A}{A}$ are not derivable without contraction, but their classical counterparts $\sqq{A}{A \amand A}$ and $\sqq{A \amor A}{A}$ are surely classically valid. Moreover, this is crucial to the noncontractivist's success in avoiding derivations of the empty sequent; adding sequents like these to a noncontractive system would (together with cut) reinstate a variant of the liar derivation considered in \S\ref{naivetruth}. A noncontractive treatment of liar sentences requires them to be treated as counterexamples to these classically-valid arguments.
+
+On the other hand, noncontractive approaches do allow for derivation of $\sqq{A}{A \aand A}$ and $\sqq{A \aor A}{A}$, which have the same classical counterparts as the above. Appeals to these sequents, and others like them, give noncontractivists resources to insist on an important sense in which classical logic {\em is} present in their approach. For example, \cite{mp:lcp} point out that, if we stick to a language without quantifiers, the classically-valid arguments are precisely those that are valid-on-some-disambiguation in a system like \nclog, where the disambiguation in question is between additive and multiplicative. Because of this, Mares and Paoli argue, their noncontractive approach is not logically {\em revisionary}, or at least not in a bad way; every classically-valid argument is valid on {\em some} disambiguation (into additive and multiplicative), even if not on {\em every} disambiguation.
+
+If this response can be made to fly for the full language, it would lessen the sting of any charge that noncontractivists are too logically revisionary. This would require what we do not have: a theory of additive and multiplicative {\em quantification} for which the analogous claim can be sustained.\footnote{The claim would run into trouble, for example, if \citeauthor{zardini:twc}'s \citeyearpar{zardini:twc} rules for multiplicative quantification were to be adopted. These rules are enough to turn $\omega$-inconsistency into flat-out inconsistency, and so are not clasically sound; a system involving these rules thus goes beyond classical logic in ways that have nothing to do with the truth predicate.} Although we do not know that such a thing {\em cannot} be found, until we have one this response to the charge of unnecessary revision is at best incomplete.
+
+Moreover, making this response of course depends on actually having the full complement of additive and multiplicative connectives (and eventually quantifiers) in the language, which only some proponents of noncontractive approaches want. For example, \cite{zardini:nmp} argues for doing without additives entirely, while \cite[34--35]{brady:ul} argues against including multiplicative conjunction. Zardini's restriction is optional, from a paradox-blocking point of view. But Brady's is not; Brady's favored set theory would be rendered trivial if multiplicative conjunction were added to the language. (See \citealt[366-367]{rlr1} for the argument, credited there independently to Dunn and Slaney.) Multiplicative disjunction, in particular, is often missing from noncontractivist proposals; for example, neither \cite{shapiro:nscp} nor \cite{bm:2curry} makes any allowance for it.
+
+For now, then, proponents of noncontractive approaches are recommending deviations from classical logic on a broader scale than are proponents of the nontransitive approach considered here, and for many such approaches this will remain the case. (There is nothing to {\em prevent} a proponent of a nontransitive approach from deviating further than \ntlog\ does; for examples, see \cite{tennant:arl, weir:arntl}, and \cite{thomas:kss}. But such further deviation is not {\em forced}, as it is for the noncontractivist.)
+
+Of course, neither a noncontractive nor a nontransitive approach allows for all the behaviour we are used to in classical settings; both cut and contraction have been taken to be part of the very definition of a consequence relation by a number of authors, for example \cite{humberstone:c}, and so any substructural approach must obviously fail to be {\em fully} logically conservative. If conservativity is seen as a desideratum for theory change, as it often is (e.g., \citealt{quine:tde}; \citealt{sklar:mc}; \citealt{lycan:jj}), then this is some drawback.
+
+The extent of the drawback, though, can be minimized by the nontransitivist. Whatever deviations from received logical wisdom are involved in adhering to \ntlog\ or its relatives, they do not involve declaring any classically-valid arguments to be invalid. As such, no restriction of classically-endorsed reasoning patterns is needed, on such a view. To the extent that we value avoiding such restrictions, then, there is some reason to prefer a nontransitive approach to a noncontractive one. 
+
+
+
+\subsection{Varieties of Modus Ponens}
+
+\cite{zardini:nmp} clearly distinguishes between a variety of principles which can be taken to answer to the name {\em modus ponens}. Neither the noncontractivist nor the nontransitivist can accept all of these principles. In this subsection, I'll quickly outline the situation; as modus ponens is important for reasoning, substructuralists of both stripes must take real care here.
+
+\subsubsection{Modus Ponens as a Sentence}
+
+First, we have single-sentence versions of modus ponens, of the form $(A \amand (A \amcond B)) \amcond B$. On the nontransitive approach, there is only one such sentence (up to intersubstitutability), and it is a theorem (since it is a classical theorem, and all classical validities are preserved in \ntlog); on a noncontractive approach, there are eight, since each of the three connectives involved has two readings. Of these eight, two are theorems: $(A \mand (A \mcond B)) \mcond B$ and $(A \mand (A \acond B)) \mcond B$. 
+
+If the $\amand$ is read as $\aand$, then the lack of contraction prevents the two conjuncts from interacting with each other to generate $B$. As you can see in the $\aand$L rule, an additive conjunction can serve as a premise where {\em either one} of its conjuncts will serve, but not where {\em both} are needed. Modus ponens, though, is a case where both are needed: neither $A$ nor $A \amcond B$ is enough on its own for $B$ (no matter how $\amcond$ is read). Here we are looking at sentences rather than arguments, but the same behaviour carries through.
+
+Thus, the $\wedge$ must be read as $\mand$. (As you can see in the $\mand$L rule, a multiplicative conjunction can serve as a premise where {\em both} of its conjuncts are needed.) Likewise, the only $\acond$ theorems on the noncontractive approach are those with theorems as consequents, or explosive sentences as antecedents. This is clearly not such a case, so the second $\amcond$ must be multiplicative as well. The inner $\amcond$, however, can be either additive or multiplicative.
+
+\subsubsection{Modus Ponens as an Argument}
+
+Next, we have single-premise arguments, of the form $\sqq{A \amand (A \amcond B)}{B}$. Again, the nontransitive approach has only one such argument, and, since the argument is classically valid, it's valid on the nontransitive approach as well. There are four such arguments on a noncontractive approach: the two involving $\mand$ are valid, and the two involving $\aand$ are invalid. Again, the problem is that additive conjunction will only allow its conjuncts to interact with each other in the presence of contraction.
+
+Third, there are two-premise arguments, of the form $\sqq{A, A \amcond B}{B}$. Again, the nontransitive approach sees one argument, and validates it. A noncontractive approach is now down to two readings, since there is only one connective in play. Both of these readings are derivable for the noncontractivist:
+
+\medskip
+{
+\centering
+\AXC{\sqq{A}{A}}
+\AXC{\sqq{B}{B}}
+\LLl{$\mcond$L}
+\BIC{\sqq{A, A \mcond B}{B}}
+\DP
+\hs
+\AXx{A}{A}
+\LLl{KR}
+\UIx{A}{A, B}
+\AXx{B}{B}
+\LLl{KL}
+\UIx{A, B}{B}
+\LLl{$\acond$L}
+\BIC{\sqq{A, A \acond B}{B}}
+\DP
+
+
+}
+\medskip
+
+So far, then, all the versions we've seen of modus ponens are valid on the nontransitive approach, while a noncontractive approach must take a bit more care. While either version of the two-premise modus ponens is valid on a noncontractive approach, the other versions have both valid and invalid forms. However, since each version has valid forms, the noncontractivist who wants to defend modus ponens in certain cases can always insist that those cases are to be read in one of the ways that makes modus ponens valid, unless there is some other reason to suspect this claim. 
+
+To the (perhaps limited) extent that we want to choose some particular version of modus ponens to be the ``real'' modus ponens, I think it's most plausible to choose the two-premise form: this is the form that focuses directly on the conditional, and doesn't muck about with conjunctions. After all, modus ponens is most standardly thought of as a principle governing (certain) conditionals, not governing the interaction of conditionals and conjunctions, and it's the two-premise argument form that allows this to shine through. From this point of view, both the nontransitivist and the noncontractivist validate the ``real'' modus ponens; there is not much to choose between them here.
+
+\subsubsection{Modus Ponens as a Metainference}
+
+But there's more to modus ponens than this: there are metainferential versions of modus ponens as well. These are not arguments at all, but rather sequent rules connecting some valid arguments to others. I'll consider two forms here, which I'll call {\em context-sharing} and {\em context-free} metainferential modus ponens (CSMMP and CFMMP, respectively).\footnote{{\em Additive} and {\em multiplicative} would also be natural names here, but since each rule could be applied to either the additive or multiplicative $\amcond$, that would get a bit confusing, at least for me.}
+
+
+\medskip
+{
+\centering
+\AXC{\sqq{\Gamma}{A, \Delta}}
+\AXC{\sqq{\Gamma}{A \amcond B, \Delta}}
+\LLl{CSMMP}
+\BIC{\sqq{\Gamma}{B, \Delta}}
+\DP
+\vs
+\AXC{\sqq{\Gamma}{A, \Delta}}
+\AXC{\sqq{\Gamma'}{A \amcond B, \Delta'}}
+\LLl{CFMMP}
+\BIC{\sqq{\Gamma, \Gamma'}{B, \Delta, \Delta'}}
+\DP
+
+}
+\medskip
+
+\noindent
+Of course, each of these forms comes in two versions for the noncontractivist, depending on which $\amcond$ is used. In this case, though, both conditionals give the same result: CFMMP is derivable in \nclog, for both $\acond$ and $\mcond$, and CSMMP must be rejected. (More on this rejection of CSMMP presently.) So the division between CSMMP and CFMMP looms large for the noncontractivist whichever conditional is in play.
+
+For the nontransitivist, on the other hand, these two rules stand or fall together, as they are derivable from each other in the presence of weakening and contraction.  As it happens, they must fall. As is pointed out in \cite[19]{np:spt}, CFMMP brings almost every instance of cut with it, given $\mcond$R---all that is needed is that $\D'$ is nonempty; that is, that $\D' = \D'', \delta$ for some formula $\delta$. Then we have the following derivation:
+\begin{prooftree}
+\AXx{\G}{A, \D}
+\AXx{\G', A}{\D'}
+\LLl{$\mcond$R}
+\UIx{\G'}{A \mcond \delta, \D''}
+\LLl{CFMMP}
+\BIx{\G, \G'}{\D, \D'}
+\end{prooftree}
+
+
+\medskip
+\noindent 
+But this is far too much cut to be tolerated by a proponent of \ntlog\ or its relatives; the restriction to nonempty $\D'$ is hardly a restriction at all.\footnote{This is especially so in the presence of a constant, like usual (multiplicative) $\bot$, that is an identity on the right hand side of a sequent; with such a critter running around, every sequent is equivalent to a sequent with a nonempty right hand side.}
+Similarly, with cut in hand it is quick to derive full CFMMP (for $\mcond$, this requires in addition Id and $\mcond$L; for $\acond$, it takes Id, K, and $\acond$L). So, for the nontransitivist, MMP (in both forms) must go; it is basically cut in disguise.
+
+As a defender of a nontransitive approach, I find it tempting at this point to make an argument along the following lines: ``Sure, I've got to reject MMP. But we can see it's almost equivalent to cut, so this is no {\em additional} problem for my view. Whatever is allegedly wrong with rejecting MMP must already be wrong with rejecting cut.'' I've come to think, though, that this kind of response is at best only half-fair. It's true that rejecting MMP is no worse of a problem than rejecting cut is, since they're more or less equivalent to each other. But \cite{zardini:nmp} argues that this rejection of CFMMP is a real problem. If this is right, there's a real problem with rejecting cut. It doesn't have to be a problem over and above {\em itself} in order to be a problem!
+
+Zardini argues as follows: 
+
+\begin{quote}
+For the {\em logical} idea of modus ponens can be seen as intimately connected with and arguably grounded in the {\em semantic} idea that {\em a true conditional cannot have a true antecedent and an untrue consequent;} yet, on the strategy under consideration, since $\sqq{}{\Tname{\curry} \amcond \bot}$ and $\sqq{}{\Tname{\curry}}$ hold, we're presumably asked to accept that they are true (and, given other details of the theory, false), while $\bot$ is untrue. So we're in effect asked to reject the idea that a true conditional cannot have a true antecedent and an untrue consequent. This is not only in itself rebarbative; as I've just indicated, it also means to reject the very semantic idea with which modus ponens is intimately connected and in which it is arguably grounded. \citeyearpar[579]{zardini:nmp}\footnote{Notation changed, emphasis in original. Zardini is actually discussing a version of curry paradox that uses an entailment connective rather than $\amcond$, but nothing that makes a difference here hangs on that difference.} 
+\end{quote}
+
+I agree with Zardini that a true conditional cannot have a true antecedent and an untrue consequent.\footnote{After all, the sequent $\sqq{}{\neg ((A \amcond B) \amand A \amand \neg B)}$ is classically valid, so valid in \ntlog\ (my recommended approach) as well. By transparency, $\sqq{}{\neg (\Tname{A \amcond B} \amand \Tname{A} \amand \neg \Tname{B})}$. That is, Zardini's claim is a theorem, on my favoured approach as well as (appropriately disambiguated) on his.} But I certainly don't accept that this claim is what {\em grounds} modus ponens. On my view, this claim is {\em well} downstream of the real action.
+
+Arguments are in the first place about connections between premises and conclusions, not connections between conclusions and conclusions. What matters for modus ponens is the fact that $B$ validly follows from the premises $A$ and $A \amcond B$. (On the account of consequence I endorse in \cite{ripley:pafc}, this is in turn grounded in certain of our conversational norms: someone who has asserted both $A$ and $A \amcond B$, but who has also denied $B$, has violated these norms.) From that two-premise version, MMP follows {\em only via cut}. When cut fails, there too MMP can fail. But the core of modus ponens---its two-premise version---is never threatened. Nor are the formulations that make the two-premise version explicit, in the sense of \cite{brandom:mie}: the one-premise and single-sentence versions. 
+
+
+For some, this might be a bridge too far. I don't reckon it's much of a problem at all, myself; and neither should Zardini. Although Zardini accepts CFMMP, he must reject CSMMP, as must all noncontractive theorists. After all, in the presence of CSMMP and cut, there is simply no need for contraction to produce troublesome results from a curry sentence $\curry$ that is $\Tname{\curry} \mcond \bot$.\footnote{An anonymous referee objects here that CSMMP `has contraction in it'. For discussion of this kind of response, see \S\ref{cautiouscut}---a different principle is at issue there, but the argumentative situation is relevantly the same.} Consider the following derivation:\footnote{Although this derivation uses the multiplicative conditional, an analogous derivation can be constructed involving the additive conditional, if it is assumed to obey CSMMP, with the difference that the derivation carries along a second $\bot$ on the right, starting at the application of $\acond$R, and so it ends at $\sqq{}{\bot, \bot}$ rather than at $\sqq{}{\bot}$. But this is no happier a place to end up.}
+\begin{prooftree}
+\AXx{\Tname{\curry} \mcond \bot}{\Tname{\curry} \mcond \bot}
+\AXx{\Tname{\curry} \mcond \bot}{\Tname{\curry} \mcond \bot}
+\LLl{$\T$R}
+\UIx{\Tname{\curry} \mcond \bot}{\Tname{\curry}}
+\LLl{CSMMP}
+\BIC{\sqq{\Tname{\curry} \mcond \bot}{\bot}}
+\end{prooftree}
+
+\noindent Call this derivation $\delta_1$. Then we have:
+\begin{prooftree}
+\AXC{$\delta_1$}
+\noLine
+\UIx{\Tname{\curry} \mcond \bot}{\bot}
+\LLl{$\T$L}
+\UIx{\Tname{\curry}}{\bot}
+\LLl{$\mcond$R}
+\UIx{}{\Tname{\curry} \mcond \bot}
+\AXC{$\delta_1$}
+\noLine
+\UIx{\Tname{\curry} \mcond \bot}{\bot}
+\LLl{Cut}
+\BIC{\sqq{}{\bot}}
+\end{prooftree}
+
+
+This is why noncontractivists cannot accept CSMMP. But note that CSMMP simply says that the consequences of any $\G$ are closed under modus ponens. This means that, although the {\em theorems} in noncontractive systems can be closed under modus ponens, the {\em consequences of particular premises} need not be, and in some cases had better not be. That is, when reasoning about what follows from premises $\Gamma$, noncontractivists like Zardini must allow that, in such a situation, $A$ and $A \mcond B$ might both follow, without $B$ following.
+
+When it comes to closure under modus ponens, then, the only difference between our views is that I think this can happen for empty $\Gamma$ and Zardini thinks it cannot. But once you're happy for such a thing to happen at all, I find it very hard indeed to see why it would be important to resist the special case where $\Gamma$ happens to be empty.
+
+One might worry that \ntlog\ has gone too far here, that without CSMMP or CFMMP or some relative, conditionals are too close to idle. They might `work' as premises, as the argument versions of modus ponens show, but they don't seem to `work' as conclusions; once concluded, conditionals seem just to sit there! But this worry would be misplaced. The following rule is admissible in \ntlog:
+\begin{prooftree}
+\AXx{\G}{A \to B, \D}
+\UIx{\G, A}{B, \D}
+\end{prooftree}
+\noindent Conditionals, as conclusions, have the same force that {\em validity itself} has. (Conditionals make validity explicit, again in the sense of \cite{brandom:mie}.) And validity is surely not idle: as above, I reckon its force is to rule out asserting the premises while denying the conclusions; this is a substantive restriction. So even as conclusions, conditionals are far from idle in \ntlog.
+
+
+When it comes to modus ponens, then, the situation between the noncontractivist and the nontransitivist is textured. The nontransitivist can accept any sentence-level or argument-level formulation of modus ponens you like, but must reject both CSMMP and CFMMP. The noncontractivist, on the other hand, needs to take care about conjunction in sentence-level and some argument-level formulations of modus ponens, and must also reject CSMMP, but can accept CFMMP. There is of course room to worry that rejecting CSMMP, as both the noncontractivist and the nontransitivist do, makes for serious trouble with substructural views entirely. CSMMP is, after all, nothing more than a guarantee that theories are closed under modus ponens, which might seem like a natural desideratum. If this is trouble, it is trouble shared by the noncontractivist and the nontransitivist. (See \S\ref{cautiouscut} for discussion of a related issue.)
+
+
+\subsection{Conditional Contraction and RUQ}
+
+Consider a sequent of the form $\sqq{A \amcond (A \amcond B)}{A \amcond B}$; call this {\em conditional contraction} (to contrast with the rule of {\em structural contraction}, which we've been considering throughout).\footnote{There are other versions we might consider; the single-sentence version $(A \amcond (A \amcond B)) \amcond (A \amcond B)$, particularly leaps to mind. But I'll skip that here; the form in the text is enough to get a sense for how things play out.} The nontransitive approach sees essentially one sequent here, and validates it (since it's classically valid). A noncontractive approach, as you'd expect by now, makes eight readings available.
+
+Of the eight, three are valid on a noncontractive approach: $\sqq{A \acond (A \acond B)}{A \acond B}$; $\sqq{A \acond (A \acond B)}{A \mcond B}$; and $\sqq{A \acond (A \mcond B)}{A \mcond B}$. The other five are invalid. Since $\acond$ is very rarely used in noncontractive theories, these can seem more like curiosities than anything. Conditional contraction, for most noncontractive theorists, simply fails. Because of this, for much of this section I will treat the noncontractive approach as though it used $\mcond$ exclusively. It will not come out well for such an approach. But I don't take this to provide an argument against a noncontractive approach in general. Rather, I take it to provide an argument that, at least sometimes, a noncontractivist should acknowledge and make use of $\acond$.
+
+
+Conditional contraction has been held responsible for much mischief among nonclassical logicians concerned with paradox. (For details, see \citealt{restall:htbrcf, restall:lwc}.) In particular, together with modus ponens and conditional identity (that is, $\sqq{}{A \to A}$) it seems to play an important role in many formulations of curry paradox. For this reason, a number of different proposals for dealing with paradox, substructural and nonsubstructural alike, hinge in part on doing without conditional contraction, or at the very least on distinguishing two different conditionals, one of which obeys modus ponens and conditional identity but not conditional contraction, and the other of which obeys conditional contraction but not both modus ponens and conditional identity.\footnote{For examples of this latter, two-conditional strategy, see \cite{priest:ic, field:stp} and \cite{beall:sot}.}
+
+Most often, the reasons given for rejecting conditional contraction are flatly ad hoc: together with modus ponens and conditional identity, it seems to doom us to curry-flavoured disaster, but modus ponens and conditional identity are intuitively better-supported than conditional contraction. Thus, it is often thought, if one of them has to go, it should be conditional contraction. This has all the charm of thumbscrews: it may convince some to submit, but it does nothing to help us accustom ourselves to the situation.\footnote{A notable and praiseworthy exception in this regard is \cite{brady:ul}, whose focus on the idea of {\em content containment} motivates the existence of at least some notion for which contraction ought to fail: from the claim that $A$'s content contains the content of the claim that $A$'s content contains $B$'s content, it doesn't follow that $A$'s content contains $B$'s content itself. For our purposes here, though, this is little help, as our $\amcond$s here are not plausibly read as having much to do with content containment.}
+
+Complicating matters, it can be tricky to trust our intuitions about a connective like $\mcond$. This is because there are compelling and familiar reasons to take $\mcond$, in any of its manifestations here (and in many other places besides), to be a terrible model for natural language conditionals.\footnote{For example, the argument from ``If $A$ and $B$, then $C$'' to ``Either if $A$ then $C$ or else if $B$ then $C$'' is invalid, but $\sqq{(A \mand B) \mcond  C}{(A \mcond  C) \mor (B \mcond  C)}$ is derivable on both present approaches, as follows:
+
+{\centering
+\AXC{\sqq{A}{A}}
+\AXC{\sqq{B}{B}}
+\LLl{$\mand$R}
+\BIC{\sqq{A, B}{A \mand B}}
+\AXx{C}{C}
+\LLl{K}
+\UIx{C}{C, C}
+\LLl{$\mcond$L}
+\BIx{(A \mand B) \mcond C, A, B}{C, C}
+\LLl{$\mcond$R}
+\UIx{(A \mand B) \mcond C, A}{C, B \mcond  C}
+\LLl{$\mcond$R}
+\UIx{(A \mand B) \mcond C}{A \mcond  C, B \mcond  C}
+\LLl{$\mor$R}
+\UIx{(A \mand B) \mcond C}{(A \mcond  C) \mor (B \mcond  C)}
+\DP
+
+}
+\vs
+\noindent (The choice of multiplicative conjunction and disjunction here is incidental; similar embarrassments arise for $\mcond$ in the presence of additive conjunction and disjunction as well; they would just take different derivations to demonstrate.) See \cite{rlr1, priest:intro} for further discussion of this and other examples.} As such, we shouldn't form strong views as to which $\mcond$-involving arguments ought to be valid based on natural-language conditional-involving arguments. Whatever $\mcond$ is good for, it isn't {\em that}.
+
+We looked above, though, at one of the things that $\amcond$ {\em is} good for: restricted universal quantification. If we understand $\rall{}{A}{B}$ as $\amforall x (Ax \amcond Bx)$, as is traditional, then conditional contraction amounts to RUQ contraction: $\sqq{\rall{}{A}{\rall{}{A}{B}}}{\rall{}{A}{B}}$. In words, this is the argument from ``All $A$s are such that all $A$s are $B$s'' to ``All $A$s are $B$s''. {\em No} theory of RUQ cited above includes this principle, as, together with the other desiderata, it leads to an RUQ-based variant of curry paradox. In fact, avoiding the validity of RUQ contraction is one of the main desiderata sought in \cite{rrq}, for just this reason.
+
+This kind of approach, though, must grapple with the following concerns. Imagine having to decide whether all $A$s are $B$s. Well, if all $A$s are such that all $A$s are $B$s, then, it would seem, that's that: the $A$s have spoken, and nothing else has any claim to mattering. That is, if it's not the case that all $A$s are $B$s, then there must be a counterexample, and if there's a counterexample it must be {\em among the $A$s}; if they're all such that all $A$s are $B$s, then indeed all $A$s {\em are} $B$s. Those approaches to RUQ that have avoided RUQ contraction (such as \citealp{rrq}; \citealp{beall:sot}; \citealp{field:stp,field:ntrq}) have not alleviated this impression.\footnote{\cite{brady:ul} is again noteworthy in this connection. Despite having done much to make failures of conditional contraction seem plausible and reasonable, Brady sees that his reasoning does not extend to RUQ, and indeed he accepts RUQ contraction, avoiding RUQ curry by rejecting the RUQ versions of both modus ponens and conditional identity.}
+
+By failing to derive conditional contraction, then, a noncontractive approach can face difficulty in its theory of RUQ. Because of this, I would heartily commend $\acond$ to noncontractivists for purposes of RUQ. Noncontractivists should understand $\rall{}{A}{B}$ as $\forall x (A(x) \acond B(x))$ instead of $\forall x (A(x) \mcond B(x))$. This shift to $\acond$ restores RUQ contraction. There is a minor difficulty with the desiderata of \S\ref{ruq} for the noncontractivist even here, as they will no longer validate $\sqq{}{\rall{}{A}{A}}$ on such an approach, but only the weaker $\sqq{}{\rall{}{A}{A}, \rall{}{A}{A}}$. I reckon this is a small price to pay. (The situation is the same---and for the same reasons---with the additive law of excluded middle: $\sqq{}{A \aor \neg A, A \aor \neg A}$ is derivable in \nclog, but $\sqq{}{A \aor \neg A}$ is not. Noncontractivists who are comfortable there should have no trouble here.)
+
+The nontransitive approach, of course, validates both conditional and RUQ contraction without any fuss, as well as $\sqq{}{\rall{}{A}{A}}$, as all of these are classically valid. When it comes to RUQ, then, I reckon that \ntlog\ slightly outperforms \nclog. 
+
+One might think that, just as a noncontractive approach can face difficulty with RUQ contraction, that the nontransitive approach faces a similar difficulty with RUQ-based expressions of transitivity. (Something like this worry has been expressed to me in conversation by both Jc Beall and Elia Zardini, independently.) This, though, is not the case. If there is an RUQ-based expression of transitivity, it is presumably the sequent $\sqq{\rall{}{A}{B}, \rall{}{B}{C}}{\rall{}{A}{C}}$; in words, the argument from ``All $A$s are $B$s'' and ``All $B$s are $C$s'' to ``All $A$s are $C$s''. This is a compelling argument; if the nontransitive approach had to reject the validity of this argument, that would indeed be a problem parallel to the noncontractivist's rejection of RUQ contraction.
+
+But the nontransitive approach is under no such obligation; this sequent is perfectly derivable, understanding $\rall{}{A}{B}$ as above. After all, it is certainly classically derivable, and, as we've seen, everything classically derivable is also derivable for the nontransitivist. So there is no comparable RUQ-based difficulty for the nontransitivist.
+
+
+\subsection{Cumulative Reasoning}
+
+Here is a familiar picture of how to come to know more and more via deduction. Take Alice. She starts from some stock of premises. From these, she draws certain conclusions (step one). Then she adds these conclusions to her original premises, generating an expanded stock (step two). With this expanded stock in hand, she repeats the process, for as long as she cares to. Call this way of reasoning {\em cumulative reasoning}; it allows Alice to accumulate a larger and larger stock of knowledge as she goes. At first blush, it might seem that, so long as we stick to {\em deductive} argument, the only way for cumulative reasoning to go wrong is in step one: Alice might draw a conclusion that doesn't really follow from her premises. As long as her conclusions actually do follow, we might think, there can be no risk introduced by step two. She can expand her stock of premises in this way without risk. 
+
+The noncontractivist and the nontransitivist alike must reject this first-blush impression, although for different reasons. For the noncontractivist, Alice might have {\em used up} some of her initial premises in reaching these conclusions; these used premises cannot be retained for future reasoning, as this would allow for them to be used twice.\footnote{Here I discuss only noncontractivist qualms with step two, but note that the noncontractivist---unlike the nontransitivist---may have qualms about step one as well. On their view, Alice cannot necessarily conclude {\em all} the things that follow from her premises, as more than one of these things may depend on the same premise. Reaching one such conclusion will {\em use up} her premise, blocking her from reaching the other. For discussion, see \cite{cp:imct}.} For the nontransitivist, on the other hand, there is risk in using conclusions as premises for further reasoning, as this amounts to assuming transitivity.
+
+Let's look at a pair of examples. These examples involve paradox, where noncontractive and nontransitive approaches reveal their respective nonstandardnesses. The noncontractive case first: Suppose Alice begins with the single premise `The curry sentence is true'. From this premise, she concludes `If the curry sentence is true, then $\bot$', by disquoting. Then she adds this conclusion to her stock of premises. Now she has a conditional and its antecedent among her premises, so she validly concludes $\bot$, by modus ponens. According to the noncontractivist, something must have gone wrong, since they insist that $\bot$ does not validly follow from `The curry sentence is true'. Alice's mistake, they will say, was in {\em retaining} her initial premise after she had already drawn on it: this is not always safe, and here it's gone awry.
+
+
+
+According to the nontransitivist, on the other hand, $\bot$ {\em does} follow validly from `The curry sentence is true'. As such, although Alice may have made a mistake in her reasoning in the above example (adding a conclusion to her premises), this mistake didn't lead her astray. She could have reached the same conclusion from her premise directly, without reasoning cumulatively at all. 
+
+To see the nontransitivist's concern, we need a different example. In this second example, Alice begins with no premises at all. By nontransitivist lights, `The curry sentence is true' follows validly from no premises; it is a theorem. But suppose Alice were to take this valid conclusion and add it to her stock of premises. Then, since this claim entails $\bot$, she could immediately conclude $\bot$. Since $\bot$ does not follow from no premises (all are agreed), something must have gone wrong here; the nontransitivist will say it was Alice's using a conclusion as a premise. 
+
+So neither the noncontractivist nor the nontransitivist can fully approve of cumulative reasoning. They diagnose different problems with it, and quarrel with different instances, but to the extent that cumulative reasoning is nonnegotiable, both noncontractive and nontransitive approaches are simply ruled out.
+
+Each, of course, will have replacements to offer. The noncontractivist can offer a version of cumulative reasoning that is very careful about just which premises are appealed to where, making sure to discard everything that has been reasoned {\em from}, but able to retain whatever has been reasoned {\em to} most recently. The nontransitivist, on the other hand, can offer full cumulative reasoning in cases where cut is eliminable (which is {\em almost} always, but crucially not always); in these cases, they see cumulative reasoning as a safe shortcut to places that could in principle be reached in a more roundabout way. Whether either of these can fill all the purposes for which we want cumulative reasoning, and whether all those purposes are themselves legitimate, are issues I won't enter into here.
+
+
+
+
+\subsubsection{Cautious Cut} \label{cautiouscut}
+
+
+
+It's interesting that neither the noncontractivist nor the nontransitivist can trust cumulative reasoning, since, at least at first glance, cumulative reasoning can seem to have much more to do with {\em transitivity} than it does with contraction. This is not a coincidence. In this section, I'll examine the property of {\em cautious cut}, which is distinct from cut. It will emerge that both the nontransitivist {\em and} the noncontractivist must avoid cautious cut; it would trivialize either approach. But it is {\em cautious cut}, not cut, that has the best claim to the intuitive motivation for transitivity. I conclude that, in addition to giving up contraction, noncontractive views don't even get to keep the kind of transitivity worth wanting.
+
+The reason for the importance of cautious cut is that it is in this form that transitivity connects with cumulative reasoning. A consequence relation obeys {\em cautious cut} iff whenever $\sqq{\G}{A}$ and $\sqq{\G, A}{B}$ are valid, then so too is $\sqq{\G}{B}$. The connection to cumulative reasoning should be apparent: reasoning cumulatively, if $A$ validly follows from $\G$, and $B$ validly follows from $\G$ together with $A$, then we can conclude $A$ from $\G$, add it to $\G$ to reach $B$, and then take ourselves to have reached $B$ from $\G$. Cautious cut is more usually studied in relation to nonmonotonic logics, but it turns out to matter here as well. Both noncontractive and nontransitive approaches must reject it; the problems already discussed for cumulative reasoning apply directly to cautious cut.
+
+
+
+Note that cut proper, as presented in \S\ref{structrules}, is independent of cautious cut, at least in the absence of contraction. In the presence of contraction, on the other hand, cut entails cautious cut.\footnote{A version of cautious cut generalized to allow for multiple-conclusion sequents {\em would} entail cut, given weakening, but the converse would still require contraction.} As we've seen, both the noncontractive and the nontransitive approaches must reject cautious cut; the only way to retain cut, then, is to reject contraction.
+
+But why should we want to retain cut? Arguments in favour of cut itself tend to proceed by pointing to the value of cumulative reasoning: that is, they are in the first instance arguments for {\em cautious cut}. For example, \cite[377]{boolos:dec} says that the presence of cut `permits the development and utilization within derivations of {\em subsidiary} conclusions, or, as they would be called in a more informal setting, {\em lemmas}.\ldots Sustained ordinary reasoning cannot be carried on in a [system without cut], where we are unable to appeal to previously established conclusions'.\footnote{Similar motivation can be found in \citet*{klm:nonmonotonic}; note that they use the term `cut' for (a principle closely related to) what I am here calling `cautious cut'.}
+
+Boolos was considering systems in which contraction is implicit, and so he had little reason to distinguish cut from cautious cut. But we can see that his argument applies in the first place to cautious cut, and only derivatively, if at all, to cut proper. Sustained ordinary reasoning, where it involves lemmas, involves them on the model of cumulative reasoning: as things that, once established, can be drawn on {\em repeatedly} in combination with any other available information, {\em including} the very information appealed to in establishing them. Neither the nontransitive nor the noncontractive approach can accommodate this in the obvious way; both owe a story about the failure of this important {\em transitivity} property. But this threatens to undercut any motivation the noncontractivist can offer for retaining cut: without cautious cut, what's so important about cut itself?
+
+There might be some temptation, on the part of the noncontractivist, to claim that cautious cut is not a {\em pure} transitivity property, because it involves some admixture of contraction. One hears claims like this all the time in informal discussions; and although it is often unclear exactly what they amount to, they are far from meaningless. I will consider three ways of understanding this objection; none of them, I think, should convince us that the noncontractivist can dodge the present worry.
+
+First, if the objection is understood merely as the claim that noncontractivists must reject cautious cut in order to avoid triviality, then it's hardly an objection at all---it's my point, and the {\em source} of the present worry. 
+
+Perhaps, though, the objector means to point to the fact that {\em two} copies of $\G$ come into an application of cautious cut, one in each premise-sequent, but that only {\em one} copy of $\G$ comes out in the conclusion-sequent. This two-to-one move of course {\em smells like} contraction---$\G$ must be used twice in the premise-sequents (once in each sequent), while only a single use is recorded in the conclusion-sequent. But a quick glance at the noncontractivist's two-premise rules for the additive connectives reveals that they all exhibit this exact feature. So a two-to-one move of this sort, despite its odour, does {\em not} necessarily involve smuggling in any contraction.
+
+Third, the objector might mean to claim that contraction {\em follows from} cautious cut, or at least that some important instances of it do. I think this is the most charitable reading to give to the objection. Consider the following move:
+\begin{prooftree}
+\AXC{\sqq{\G, A}{A}}
+\AXC{\sqq{\G, A, A}{B}}
+\LLl{CCut}
+\BIC{\sqq{\G, A}{B}}
+\end{prooftree}
+This is an instance of cautious cut, and its first premise-sequent is always valid (given reflexivity and weakening). So, by using cautious cut, we can always move from $\sqq{\G, A, A}{B}$ to $\sqq{\G, A}{B}$, and that's enough contraction to cause trouble for the noncontractivist.
+
+Again, though, this is less an objection than it is my point. The best-motivated kind of transitivity, motivated by considering its role in `sustained ordinary reasoning', is not cut at all, but cautious cut. Since it turns out that cautious cut brings with it a wide range of instances of contraction, it follows that {\em respecting transitivity} brings with it this same wide range. 
+
+So the best-motivated kind of transitivity must go, for both the nontransitivist and noncontractivist, and go it shall. But having gotten rid of cautious cut, there isn't much value left in retaining cut itself. Better to follow through on the rejection of all forms of transitivity and be done with it. 
+
+This argument cannot be turned around. The most natural motivations for contraction are motivations for contraction proper; there is no better-motivated relative of contraction not open to the nontransitivist.
+
+
+
+
+
+\section{Conclusion} \label{conclusion}
+
+This paper has attempted to sketch some of the main ups and downs of the two best-developed families of substructural approaches to paradox: those based on noncontractive logics and those based on nontransitive logics. I have argued that these substructural approaches can treat a broad family of paradoxes uniformly, in a way that structural approaches, whether classical or nonclassical, cannot. Because of this uniformity, these substructural approaches have a better claim to be getting at the features at the root of the paradoxes than structural approaches do.
+
+Despite this common upside, there remain important differences between noncontractive and nontransitive approaches, and I have attempted to explore these as well. I have argued that nontransitive approaches are more logically conservative than noncontractive approaches (at least given the present state of the noncontractive art), described the way these approaches treat a variety of forms of modus ponens, suggested that noncontractive approaches should adopt an additive treatment of restricted quantification, and finally pointed out that {\em neither} family of approach sits well with the best-motivated transitivity property.
+
+As things stand, it seems to me that nontransitive approaches hold out more promise for logical treatments of these paradoxes than do noncontractive approaches. But it would certainly be premature to take the issue to be settled. What is clear, I take it, is that substructural approaches hold out real promise for increasing our understanding of a wide variety of paradoxes.
+
+\section*{Acknowledgements}For very helpful discussions of these ideas, I'm indebted to Conrad Asmus, Jc Beall, Ross Brady, Pablo Cobreros, Petr Cintula, Paul Egr\'{e}, Rohan French, Suzy Killmister, Julien Murzi, Francesco Paoli, Graham Priest, Greg Restall, Robert van Rooij, Lionel Shapiro, Zach Weber, Elia Zardini, the Melbourne Logic Group, the UConn Logic Group, and the audience at the 2014 SILFS Satellite Workshop, as well as the very helpful comments of two anonymous referees. This research has been partially supported by the grant ``Non-Transitive Logics'', number FFI2013-46451-P, from the Ministerio de Econom\'{\i}a y Competitividad, Government of Spain.
+
+%\bibliographystyle{plainnat1} 	%RM1
+%%\bibliographystyle{plain}	%RM1
+%\bibliography{cst-requested-edits}
+
+\begin{thebibliography}{54}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Anderson and Belnap(1975)]{ent1}
+Anderson, Alan~Ross, and Nuel~D. Belnap (1975).
+\newblock \emph{Entailment: The Logic of Relevance and Necessity} (Vol.~1).
+\newblock Princeton University Press.
+
+\bibitem[Barwise and Perry(1999)]{bp:sa}
+Barwise, Jon, and John Perry (1999).
+\newblock \emph{Situations and Attitudes}.
+\newblock CSLI Publications.
+
+\bibitem[Beall(2009)]{beall:sot}
+Beall, Jc (2009).
+\newblock \emph{Spandrels of Truth}.
+\newblock Oxford University Press.
+
+\bibitem[Beall(2011)]{beall:atrrq}
+Beall, Jc (2011).
+\newblock Adding to Relevant Restricted Quantification.
+\newblock \emph{Australasian Journal of Logic}, \emph{10},~36--44.
+
+\bibitem[Beall and Murzi(2013)]{bm:2curry}
+Beall, Jc, and Julien Murzi (2013).
+\newblock Two Flavors of {C}urry's Paradox.
+\newblock \emph{Journal of Philosophy}, \emph{110}(3),~143--165.
+
+\bibitem[Beall et~al.(2006)Beall, Brady, Hazen, Priest, and Restall]{rrq}
+Beall, Jc, Ross~T. Brady, Allen~P. Hazen, Graham Priest, and Greg Restall
+  (2006).
+\newblock Relevant Restricted Quantification.
+\newblock \emph{Journal of Philosophical Logic}, \emph{35}(6),~587--598.
+
+\bibitem[Boolos(1984)]{boolos:dec}
+Boolos, George (1984).
+\newblock Don't Eliminate Cut.
+\newblock \emph{Journal of Philosophical Logic}, \emph{13}(4),~373--378.
+
+\bibitem[Brady(2006)]{brady:ul}
+Brady, Ross~T.\ (2006).
+\newblock \emph{Universal Logic}.
+\newblock CSLI Publications.
+
+\bibitem[Brandom(1994)]{brandom:mie}
+Brandom, Robert (1994).
+\newblock \emph{Making it Explicit}.
+\newblock Harvard University Press.
+
+\bibitem[Cintula and Paoli(2015)]{cp:imct}
+Cintula, Petr, and Francesco Paoli (2015).
+\newblock Is Multiset Consequence Trivial?
+\newblock Manuscript submitted for publication.
+
+\bibitem[Cobreros et~al.(2013)Cobreros, {\'{E}}gr{\'{e}}, Ripley, and van
+  Rooij]{cervr:rtt}
+Cobreros, Pablo, Paul {\'{E}}gr{\'{e}}, David Ripley, and Robert van Rooij
+  (2013).
+\newblock Reaching Transparent Truth.
+\newblock \emph{Mind}, \emph{122}(488),~841--866.
+
+\bibitem[Dummett(1991)]{dummett:lbom}
+Dummett, Michael (1991).
+\newblock \emph{The Logical Basis of Metaphysics}.
+\newblock Duckworth.
+
+\bibitem[Field(2008)]{field:stp}
+Field, Hartry (2008).
+\newblock \emph{Saving Truth from Paradox}.
+\newblock Oxford University Press.
+
+\bibitem[Field(2014)]{field:ntrq}
+Field, Hartry (2014).
+\newblock Naive Truth and Restricted Quantification: Saving Truth a Whole Lot
+  Better.
+\newblock \emph{Review of Symbolic Logic}, \emph{7}(1),~147--191.
+
+\bibitem[Gri{\u{s}}in(1982)]{grishin:pstclwc}
+Gri{\u{s}}in, Viacheslav~Nikolaevich (1982).
+\newblock Predicate and Set-Theoretic Calculi Based on Logic Without
+  Contractions.
+\newblock \emph{Mathematics of the USSR---Izvestiya}, \emph{18}(1),~41--59.
+\newblock English translation.
+
+\bibitem[Halbach(2011)]{halbach:att}
+Halbach, Volker (2011).
+\newblock \emph{Axiomatic Theories of Truth}.
+\newblock Cambridge University Press.
+
+\bibitem[Hinnion and Libert(2003)]{hl:pae}
+Hinnion, Roland, and Thierry Libert (2003).
+\newblock Positive Abstraction and Extensionality.
+\newblock \emph{Journal of Symbolic Logic}, \emph{68}(3),~828--836.
+
+\bibitem[Humberstone(2012)]{humberstone:c}
+Humberstone, Lloyd (2012).
+\newblock \emph{The Connectives}.
+\newblock MIT Press.
+
+\bibitem[Kraus et~al.(1990)Kraus, Lehmann, and Magidor]{klm:nonmonotonic}
+Kraus, Sarit, Daniel Lehmann, and Menachem Magidor (1990).
+\newblock Nonmonotonic Reasoning, Preferential Models and Cumulative Logics.
+\newblock \emph{Artificial Intelligence}, \emph{44}(1),~167--207.
+
+\bibitem[Lycan(1988)]{lycan:jj}
+Lycan, William~G.\ (1988).
+\newblock \emph{Judgment and Justification}.
+\newblock Cambridge University Press.
+
+\bibitem[Mares and Paoli(2014)]{mp:lcp}
+Mares, Edwin, and Francesco Paoli (2014).
+\newblock Logical Consequence and the Paradoxes.
+\newblock \emph{Journal of Philosophical Logic}, \emph{43}(2--3),~439--469.
+
+\bibitem[Maudlin(2004)]{maudlin:tp}
+Maudlin, Tim (2004).
+\newblock \emph{Truth and Paradox}.
+\newblock Oxford University Press.
+
+\bibitem[Montagna(2004)]{montagna:somq}
+Montagna, Franco (2004).
+\newblock Storage Operators and Multiplicative Quantifiers in Many-valued
+  Logics.
+\newblock \emph{Journal of Logic and Computation}, \emph{14}(2),~299--322.
+
+\bibitem[Murzi and Shapiro(in press)]{ms:vtp}
+Murzi, Julien, and Lionel Shapiro (in press).
+\newblock Validity and Truth-Preservation.
+\newblock In Achourioti, Theodora, Henri Galinon, Kentaro Fujimoto, and
+  Jose{\'{e}}~Mart{\'{i}}nez Fern{\'{a}}ndez (Eds.), \emph{Unifying the
+  Philosophy of Truth}. Springer.
+
+\bibitem[Negri and von Plato(2001)]{np:spt}
+Negri, Sara, and Jan von Plato (2001).
+\newblock \emph{Structural Proof Theory}.
+\newblock Cambridge University Press.
+
+\bibitem[O'{H}earn and Pym(1999)]{op:lbi}
+O'{H}earn, Peter~W.\, and David~J.\ Pym (1999).
+\newblock The Logic of Bunched Implications.
+\newblock \emph{The Bulletin of Symbolic Logic}, \emph{5}(2),~215--244.
+
+\bibitem[Paoli(2005)]{paoli:aq}
+Paoli, Francesco (2005).
+\newblock The Ambiguity of Quantifiers.
+\newblock \emph{Philosophical Studies}, \emph{124}(3),~313--330.
+
+\bibitem[Petersen(2000)]{petersen:lwciua}
+Petersen, Uwe (2000).
+\newblock Logic Without Contraction as Based on Inclusion and Unrestricted
+  Abstraction.
+\newblock \emph{Studia Logica}, \emph{64}(3),~365--403.
+
+\bibitem[Priest(2006{\natexlab{a}})]{priest:dttbal}
+Priest, Graham (2006{\natexlab{a}}).
+\newblock \emph{Doubt Truth to Be a Liar}.
+\newblock Oxford University Press.
+
+\bibitem[Priest(2006{\natexlab{b}})]{priest:ic}
+Priest, Graham (2006{\natexlab{b}}).
+\newblock \emph{In Contradiction}.
+\newblock Oxford University Press.
+
+\bibitem[Priest(2008)]{priest:intro}
+Priest, Graham (2008).
+\newblock \emph{An Introduction to Non-Classical Logic: From If to Is} (2nd
+  ed.).
+\newblock Cambridge University Press.
+
+\bibitem[Priest and Routley(1982)]{pr:ps}
+Priest, Graham, and Richard Routley (1982).
+\newblock Lessons from {P}seudo-{S}cotus.
+\newblock \emph{Philosophical Studies}, \emph{42}(2),~189--199.
+
+\bibitem[Quine(1951)]{quine:tde}
+Quine, Willard Van~Orman (1951).
+\newblock Two Dogmas of Empiricism.
+\newblock \emph{The Philosophical Review}, \emph{60}(1),~20--43.
+
+\bibitem[Quine(1970)]{quine:pl}
+Quine, Willard Van~Orman (1970).
+\newblock \emph{Philosophy of Logic}.
+\newblock Prentice-Hall.
+
+\bibitem[Restall(1993)]{restall:htbrcf}
+Restall, Greg (1993).
+\newblock How to Be {\em Really} Contraction Free.
+\newblock \emph{Studia Logica}, \emph{52}(3),~381--391.
+
+\bibitem[Restall(1994)]{restall:lwc}
+Restall, Greg (1994).
+\newblock \emph{On Logics Without Contraction} (Doctoral dissertation, The University of Queensland).
+\newblock Retrieved from http://consequently.org/papers/onlogics.pdf.
+% The above entry assumes that this dissertation is published and available online. If it is unpublished, use the following
+% entry instead. 
+%\bibitem[Restall(1994)]{restall:lwc}
+%Restall, Greg (1994).
+%\newblock \emph{On Logics Without Contraction} (Unpublished doctoral dissertation).
+%\newblock The University of Queensland.
+
+
+\bibitem[Restall(2013)]{restall:adnct}
+Restall, Greg (2013).
+\newblock Assertion, Denial, and Non-Classical Theories.
+\newblock In Tanaka, Koji, Francesco Berto, Edwin Mares, and Francesco Paoli
+  (Eds.), \emph{Paraconsistency: Logic and Applications}, (81--100). Springer.
+
+\bibitem[Ripley(2013{\natexlab{a}})]{ripley:pafc}
+Ripley, David (2013{\natexlab{a}}).
+\newblock Paradoxes and Failures of Cut.
+\newblock \emph{Australasian Journal of Philosophy}, \emph{91}(1),~139--164.
+
+\bibitem[Ripley(2013{\natexlab{b}})]{ripley:ru}
+Ripley, David (2013{\natexlab{b}}).
+\newblock Revising Up: {S}trengthening Classical Logic in the Face of Paradox.
+\newblock \emph{Philosophers' Imprint}, \emph{13}(5),~1--13.
+
+\bibitem[Ripley(2014)]{ripley:nstntl}
+Ripley, David (2014).
+\newblock Naive Set Theory and Nontransitive Logic.
+\newblock \emph{Review of Symbolic Logic}.
+\newblock Advance online publication. 
+\newblock doi:10.1017/S1755020314000501.
+
+%\bibitem[Routley et~al.(1982)Routley, Meyer, Plumwood, and Brady]{rlr1}
+%Routley, Richard, Robert~K. Meyer, Val Plumwood, and Ross~T. Brady (1982).
+%\newblock \emph{Relevant Logics and their Rivals 1}.
+%\newblock Ridgeview.
+% If '1' is a volume number, then use the following entry instead.
+\bibitem[Routley et~al.(1982)Routley, Meyer, Plumwood, and Brady]{rlr1}
+Routley, Richard, Robert~K. Meyer, Val Plumwood, and Ross~T. Brady (1982).
+\newblock \emph{Relevant Logics and their Rivals} (Vol.~1).
+\newblock Ridgeview.
+
+\bibitem[Scharp(2013)]{scharp:rt}
+Scharp, Kevin (2013).
+\newblock \emph{Replacing Truth}.
+\newblock Oxford University Press.
+
+\bibitem[Shapiro(2011)]{shapiro:dlc}
+Shapiro, Lionel (2011).
+\newblock Deflating Logical Consequence.
+\newblock \emph{Philosophical Quarterly}, \emph{61}(243),~320--342.
+
+\bibitem[Shapiro(2015)]{shapiro:nscp}
+Shapiro, Lionel (2015).
+\newblock Naive Structure, Contraction, and Paradox.
+\newblock \emph{Topoi}, \emph{34}(1),~75--87.
+
+\bibitem[Sklar(1975)]{sklar:mc}
+Sklar, Lawrence (1975).
+\newblock Methodological Conservatism.
+\newblock \emph{The Philosophical Review}, \emph{84}(3),~374--400.
+
+\bibitem[Slaney(1989)]{slaney:rwx}
+Slaney, John~K.\ (1989).
+\newblock {RWX} is not Curry Paraconsistent.
+\newblock In Priest, Graham, Richard Routley, and Jean Norman (Eds.),
+  \emph{Paraconsistent Logic: Essays on the Inconsistent} (472--482).
+  Philosophia Verlag.
+
+\bibitem[Slater(1995)]{slater:pl}
+Slater, Hartley (1995).
+\newblock Paraconsistent Logics?
+\newblock \emph{Journal of Philosophical Logic}, \emph{24},~451--454.
+
+\bibitem[Tennant(1987)]{tennant:arl}
+Tennant, Neil (1987).
+\newblock \emph{Anti-Realism and Logic}.
+\newblock Oxford University Press.
+
+\bibitem[Thomas(2015)]{thomas:kss}
+Thomas, Morgan (2015).
+\newblock A {K}ripke-Style Semantics for Paradox-Tolerant, Nontransitive
+  Intuitionistic Logic.
+\newblock Manuscript submitted for publication.
+
+\bibitem[Troelstra and Schwichtenberg(2000)]{ts:bpt}
+Troelstra, Anne~Sjerp, and Helmut Schwichtenberg (2000).
+\newblock \emph{Basic Proof Theory}, (2nd ed.).
+\newblock Cambridge University Press.
+
+\bibitem[Weir(2005)]{weir:ntsl}
+Weir, Alan (2005).
+\newblock Na{\"{\i}}ve Truth and Sophisticated Logic.
+\newblock In Beall, Jc, and Bradley Armour-Garb (Eds.), \emph{Deflationism and
+  Paradox} (218--249). Oxford University Press.
+
+\bibitem[Weir(2015)]{weir:arntl}
+Weir, Alan (2015).
+\newblock A Robust Non-Transitive Logic.
+\newblock \emph{Topoi}, \emph{34}(1),~1--9.
+
+\bibitem[Zardini(2011)]{zardini:twc}
+Zardini, Elia (2011).
+\newblock Truth Without Contra(di)ction.
+\newblock \emph{Review of Symbolic Logic}, \emph{4}(4),~498--535.
+
+\bibitem[Zardini(2013)]{zardini:nmp}
+Zardini, Elia (2013).
+\newblock Naive Modus Ponens.
+\newblock \emph{Journal of Philosophical Logic}, \emph{42}(4),~575--593.
+
+\end{thebibliography}
+
+\end{document}
