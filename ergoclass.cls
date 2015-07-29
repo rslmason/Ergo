@@ -51,9 +51,6 @@
 		\MakeUppercase{\@author}\par
 	%\vskip -5pt plus 0pt minus 0pt
 	\textit{\,\@affiliation}\par
-%	\vskip 27pt plus 0pt minus 0pt
-%	 \par
-	%\setlength\parskip{0\p@ \@plus \p@}
 	}
 \end{minipage}
 \ifx\@contact\@empty\else	% does nothing if it is empty
@@ -62,7 +59,7 @@
 			}
 		\fi
 
-\vskip 15pt plus 0pt minus 0pt
+\vskip 12pt plus 0pt minus 0pt
 
 \thispagestyle{plain}%\@thanks
   \endgroup
