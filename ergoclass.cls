@@ -143,14 +143,14 @@
 }
 
 %% Font sizes
-\renewcommand\normalsize{\@setfontsize\normalsize{10.5pt}{13pt}}	% body text, subsubsection headings, 
+\renewcommand\normalsize{\@setfontsize\normalsize{10.5pt}{13pt}}	% body text, headings, 
 									% figure captions, figure text, author and affiliation
 									% header and footer text (easily changed).
 \renewcommand\tiny{\@setfontsize\tiny{5.5pt}{6pt}}				% small logo font
 \renewcommand\scriptsize{\@setfontsize\scriptsize{7pt}{8.5pt}}			% nothing? (NB: Ripley's paper uses this command)
-\renewcommand\footnotesize{\@setfontsize\footnotesize{9pt}{10pt}}		% footnotes
+\renewcommand\footnotesize{\@setfontsize\footnotesize{9pt}{12pt}}		% footnotes
 \renewcommand\small{\@setfontsize\small{9pt}{13pt}}				% abstract (easily changed - defined in this class)
-\renewcommand\large{\@setfontsize\large{11.5pt}{12pt}}				% subsection headings
+\renewcommand\large{\@setfontsize\large{11.5pt}{12pt}}				% subsection and subsubsection headings
 \renewcommand\Large{\@setfontsize\Large{12pt}{14pt}}			% section headings
 \renewcommand\LARGE{\@setfontsize\LARGE{18pt}{21.5pt}}			% title
 %\renewcommand\huge{\@setfontsize\huge{10pt}{13pt}}			% The Ergo logo uses the default size of huge
@@ -160,7 +160,7 @@
 \renewcommand\section{\@startsection {section}{1}{\z@}%			% For all of these, we remove \bfseries from the 
                                    {-3.5ex \@plus -1ex \@minus -.2ex}%			% style argument.
                                    {2.3ex \@plus.2ex}%
-                                   {\normalfont\Large}}
+                                   {\normalfont\Large\bfseries}}
 \renewcommand\subsection{\@startsection{subsection}{2}{\z@}%		% Here, we include \itshape (which might render 
                                      {-3.25ex\@plus -1ex \@minus -.2ex}%			% \normalfont obsolete).
                                      {1.5ex \@plus .2ex}%
@@ -168,7 +168,7 @@
 \renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
                                      {1.5ex \@plus .2ex}%
-                                     {\normalfont\normalsize}}
+                                     {\normalfont\large}}
 
 \setlength{\bibhang}{.25in}% This determines the length of the hanging indent in the bibliography.
 \setlength{\bibsep}{0pt}%
