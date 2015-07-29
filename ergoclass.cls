@@ -6,9 +6,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ergoclass}
 [2015/07/22 v0.1 Template for Ergo articles]
-%\newif\if@contact\@contacttrue
-%\DeclareOption{contactinfo}{\@contacttrue}
-%\DeclareOption{nocontactinfo}{\@contactfalse}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 \LoadClass[11pt, twoside]{article}
@@ -43,11 +40,11 @@
 \renewcommand\maketitle{
   \begingroup
     \setlength{\parskip}{5pt plus 0pt minus 0pt}
-%    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
-%    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
-%    \long\def\@makefntext##1{\parindent 1em\noindent
-%            \hb@xt@1.8em{%
-%                \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
+    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
+    \long\def\@makefntext##1{\parindent 1em\noindent
+            \hb@xt@1.8em{%
+                \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
 
   	\newpage
   	\null
