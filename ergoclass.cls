@@ -143,12 +143,11 @@
 }
 
 %% Font sizes
-\renewcommand\normalsize{\@setfontsize\normalsize{10.5pt}{13pt}}	% body text, headings, 
-									% figure captions, figure text, author and affiliation
-									% header and footer text (easily changed).
+\renewcommand\normalsize{\@setfontsize\normalsize{10.5pt}{13.5pt}}	% body text, figure captions, figure text, 
+									% header and footer text.
 \renewcommand\tiny{\@setfontsize\tiny{5.5pt}{6pt}}				% small logo font
 \renewcommand\scriptsize{\@setfontsize\scriptsize{7pt}{8.5pt}}			% nothing? (NB: Ripley's paper uses this command)
-\renewcommand\footnotesize{\@setfontsize\footnotesize{9pt}{12pt}}		% footnotes
+\renewcommand\footnotesize{\@setfontsize\footnotesize{9pt}{11.5pt}}		% footnotes
 \renewcommand\small{\@setfontsize\small{9pt}{13pt}}				% abstract (easily changed - defined in this class)
 \renewcommand\large{\@setfontsize\large{11.5pt}{12pt}}				% subsection and subsubsection headings
 \renewcommand\Large{\@setfontsize\Large{12pt}{14pt}}			% section headings
