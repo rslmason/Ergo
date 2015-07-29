@@ -185,7 +185,7 @@
   \fi
   \vskip\belowcaptionskip}
 
-\newenvironment{ergocases}[1][]%
+\renewenvironment{description}[1][]%
                {
 		\ifx#1\@empty\else
 			\null\par\textbf{#1}
@@ -195,10 +195,10 @@
 			\setlength{\rightmargin}{\leftmargin}
 			\labelwidth\z@
 			%\itemindent\z@
-			\let\makelabel\ergocaseslabel
+			\let\makelabel\ergolabel
 			}}
                {\endlist}
-\newcommand*\ergocaseslabel[1]{\hspace\labelsep
+\newcommand*\ergolabel[1]{\hspace\labelsep
                                 \normalfont\itshape #1}
 
 \setlength\parindent{.25in}
