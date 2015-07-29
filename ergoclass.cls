@@ -146,7 +146,7 @@
 }
 
 %% Font sizes
-\renewcommand\normalsize{\@setfontsize\normalsize{10.5pt}{14pt}}	% body text, figure captions, figure text, 
+\renewcommand\normalsize{\@setfontsize\normalsize{10.5pt}{14pt}}	% body text, affiliation, figures 
 									% header and footer text.
 \renewcommand\tiny{\@setfontsize\tiny{5.5pt}{6pt}}				% small logo font
 \renewcommand\scriptsize{\@setfontsize\scriptsize{7pt}{8.5pt}}			% nothing? (NB: Ripley's paper uses this command)
@@ -156,7 +156,7 @@
 \renewcommand\Large{\@setfontsize\Large{12pt}{14pt}}			% section headings
 \renewcommand\LARGE{\@setfontsize\LARGE{18pt}{21.5pt}}			% title
 %\renewcommand\huge{\@setfontsize\huge{10pt}{13pt}}			% The Ergo logo uses the default size of huge
-\renewcommand\Huge{\@setfontsize\Huge{10pt}{13.5pt}}			% This is used for author and affiliation
+\renewcommand\Huge{\@setfontsize\Huge{9.8pt}{13.5pt}}			% This is used for the author name
 
 %% The section styles
 \renewcommand\section{\@startsection {section}{1}{\z@}%			% For all of these, we remove \bfseries from the 
