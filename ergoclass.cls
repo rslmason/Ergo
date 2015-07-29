@@ -43,15 +43,15 @@
 \renewcommand\maketitle{
   \begingroup
     \setlength{\parskip}{5pt plus 0pt minus 0pt}
-    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
-    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
-    \long\def\@makefntext##1{\parindent 1em\noindent
-            \hb@xt@1.8em{%
-                \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
+%    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+%    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
+%    \long\def\@makefntext##1{\parindent 1em\noindent
+%            \hb@xt@1.8em{%
+%                \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
 
   	\newpage
   	\null
-	\noindent{}\fbox{\begin{minipage}[l]{4in}
+	\noindent{}{\begin{minipage}[l]{4in}
 		\vskip .6in plus 0in minus 0in
 		{\LARGE \textsc{\@title}\par}%			% This sets the text of the title.
 	\vskip 10pt plus 0pt minus 0pt
@@ -64,7 +64,7 @@
 	 \par
 	%\setlength\parskip{0\p@ \@plus \p@}
 	}
-\end{minipage}}
+\end{minipage}
 \ifx\@contact\@empty\else	% does nothing if it is empty
 			\contactnote{%
 				\textbf{Contact: }\@author~<\@contact>\par
