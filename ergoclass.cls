@@ -16,6 +16,8 @@
 %\RequirePackage{kpfonts}
 \RequirePackage[tracking=alltext, letterspace=16]{microtype}
 \RequirePackage[authoryear]{natbib}
+\RequirePackage{lettrine}
+	\renewcommand{\DefaultLoversize}{0.3}
 
 %% This sets up the layout of the document
 %% headsep determines how far above the body text the header sits
