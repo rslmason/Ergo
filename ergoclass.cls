@@ -156,7 +156,7 @@
 \renewcommand\Large{\@setfontsize\Large{12pt}{14pt}}			% section headings
 \renewcommand\LARGE{\@setfontsize\LARGE{18pt}{21.5pt}}			% title
 %\renewcommand\huge{\@setfontsize\huge{10pt}{13pt}}			% The Ergo logo uses the default size of huge
-\renewcommand\Huge{\@setfontsize\Huge{9.8pt}{13.5pt}}			% This is used for the author name
+\renewcommand\Huge{\@setfontsize\Huge{9.5pt}{13.5pt}}			% This is used for the author name
 
 %% The section styles
 \renewcommand\section{\@startsection {section}{1}{\z@}%			% For all of these, we remove \bfseries from the 
