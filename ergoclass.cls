@@ -127,8 +127,8 @@
 %% Header and footer for the non-title pages
 \pagestyle{fancy}
 \fancyhead{}
-\fancyhead[LE]{\thepage\quad$\cdot$\quad\textit{\@author}}
-\fancyhead[RO]{\textit{\@title}\quad$\cdot$\quad\thepage}
+\fancyhead[LE]{\raisebox{-3pt}[0pt][0pt]{\thepage\quad$\cdot$\quad\textit{\@author}}}
+\fancyhead[RO]{\raisebox{-3pt}[0pt][0pt]{\textit{\@title}\quad$\cdot$\quad\thepage}}
 \cfoot{\textit{Ergo} $\cdot$ \textit{vol. \@volume, no. \@issue} $\cdot$ \textit{\@year}}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
