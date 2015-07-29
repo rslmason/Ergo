@@ -202,6 +202,7 @@
 
 \setlength\parindent{.25in}
 
+\newif\if@makingtitle\@makingtitlefalse
 \newcommand\titlelinebreak{
 \leavevmode\unskip
 \if@makingtitle%
