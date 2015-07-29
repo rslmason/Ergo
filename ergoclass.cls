@@ -26,8 +26,8 @@
 %% These are the commands that collect additional information for the title page, headers, and footers.
 \newcommand*{\affiliation}[1]{\gdef\@affiliation{#1}}
 \affiliation{}
-\newcommand*{\doi}[1]{\gdef\@doi{#1}}
-\doi{}
+\newcommand*{\articledoi}[1]{\gdef\@doi{#1}}
+\articledoi{}
 \newcommand*{\volumeissueyear}[3]{\gdef\@volume{#1}\gdef\@issue{#2}\gdef\@year{#3}}
 \ClassWarning{ergoclass}{The \protect\volumeissueyear\space command needs three arguments}
 \volumeissueyear{}{}{}
