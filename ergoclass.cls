@@ -40,6 +40,9 @@
 \renewcommand\maketitle{
   \begingroup
     \setlength{\parskip}{0pt plus 0pt minus 0pt}
+    \long\def\@makefntext##1{\parindent 1em\noindent
+            \hb@xt@1.8em{%
+               \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
   	\newpage
   	\null
 	\noindent{}\begin{minipage}[l]{4in}
