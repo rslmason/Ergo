@@ -184,3 +184,21 @@
     \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
   \fi
   \vskip\belowcaptionskip}
+
+\newenvironment{ergocases}[1][]%
+               {
+		\ifx#1\@empty\else
+			\null\par\textbf{#1}
+		\fi
+		\list{}{%
+			\setlength{\leftmargin}{.25in}
+			\setlength{\rightmargin}{\leftmargin}
+			\labelwidth\z@
+			%\itemindent\z@
+			\let\makelabel\ergocaseslabel
+			}}
+               {\endlist}
+\newcommand*\ergocaseslabel[1]{\hspace\labelsep
+                                \normalfont\itshape #1.}
+
+\setlength\parindent{.25in}
