@@ -48,7 +48,7 @@
 
   	\newpage
   	\null
-	\noindent{}{\begin{minipage}[l]{4in}
+	\noindent{}\begin{minipage}[l]{4in}
 		\vskip .6in plus 0in minus 0in
 		{\LARGE \textsc{\@title}\par}%			% This sets the text of the title.
 	\vskip 10pt plus 0pt minus 0pt
