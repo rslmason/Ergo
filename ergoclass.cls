@@ -14,7 +14,7 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{mathpazo}
 %\RequirePackage{kpfonts}
-\RequirePackage[tracking=alltext, letterspace=15]{microtype}
+\RequirePackage[tracking=alltext, letterspace=16]{microtype}
 \RequirePackage[authoryear]{natbib}
 
 %% This sets up the layout of the document
