@@ -40,9 +40,16 @@
 
 %% This changes some of the functionality of the \maketitle command.
 %%
-\renewcommand{\maketitle}%
-{%
-	\setlength{\parskip}{5pt plus 0pt minus 0pt}
+\renewcommand\maketitle{
+\setlength{\parskip}{5pt plus 0pt minus 0pt}
+\par
+  \begingroup
+    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
+    \long\def\@makefntext##1{\parindent 1em\noindent
+            \hb@xt@1.8em{%
+                \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
+
   	\newpage
   	\null
 	\noindent{}\begin{minipage}[l]{4in}
@@ -60,65 +67,26 @@
 	}
 \end{minipage}
 \ifx\@contact\@empty\else	% does nothing if it is empty
-	\contactnote{%
-		\textbf{Contact: }\@author~<\@contact>\par
-	}
-\fi
-}
+			\contactnote{%
+				\textbf{Contact: }\@author~<\@contact>\par
+			}
+		\fi
 
-%    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
-%    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
-%    \long\def\@makefntext##1{\parindent 1em\noindent
-%            \hb@xt@1.8em{%
-%                \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
-%  \thispagestyle{plain}\@thanks
-%  \setcounter{footnote}{0}%
-%  \global\let\thanks\relax
+    \thispagestyle{plain}%\@thanks
+  \endgroup
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
 %  \global\let\maketitle\relax
 %  \global\let\@maketitle\relax
-%  \global\let\@thanks\@empty
-%  %\global\let\@author\@empty	% We knock this out to get access to this field throughout the article
-%  \global\let\@date\@empty
-%  %\global\let\@title\@empty	% We knock this out to get access to this field throughout the article
-%  \global\let\title\relax
-%  \global\let\author\relax
-%  \global\let\date\relax
-%  \global\let\and\relax
-%}
-%% This is the command which actually typesets the titlepage, so we can change this to fine-tune 
-%% the placement of the title block and its internal spacing. 
-%%
-%% However, it is important to keep in mind that the baselineskip of the font sizes in the title will also
-%% affect the spacing between lines.
-%%
-%\renewcommand{\@maketitle}{%
-%  \newpage
-%  \null
-%  \vskip .55in%					% This length determines how far down the page the title block starts
-%  \begin{flushleft}%
-%%  \let \footnote \thanks%			% Ergo does not use the \thanks footnote for acknowledgements.
-%\list{}{\setlength\leftmargin{0in}\setlength\rightmargin{1in}}
-%    {\LARGE \textsc{\@title}\par}%			% This sets the text of the title.
-%    \endlist
-%\vskip 1em%					% This determines the space between the title and the author's name.
-%    {\normalsize
-%      \lineskip .5em%
-%      %\begin{tabular}[t]{c}%
-%        \MakeUppercase{\@author}\par%		% This sets the author's name
-%\ifx\@contact\@empty\else%
-%  \contactnote{%					% This command sets the contact note, unless the author leaves %\contact{} empty
-%  \textbf{Contact: }\@author~<\@contact>\par
-%}\fi
-%	\vskip -.5em%				% This determines the distance betweent the author and the affiliation
-%       \textit{\@affiliation}\par
-%      %\end{tabular}\par}%
-%	}
-%    %\vskip 1em%
-%    %{\large \@date}%
-%  \end{flushleft}%
-%  \par
-%  %\vskip 2.5em}						% This determines the space between the affiliation and the %abstract
-%  \vskip 28pt}
+  \global\let\@thanks\@empty
+%  \global\let\@author\@empty
+  \global\let\@date\@empty
+%  \global\let\@title\@empty
+  \global\let\title\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+}
 
 %% This redefines the abstract environment to look how we want
 \renewenvironment{abstract}
