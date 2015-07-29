@@ -199,6 +199,6 @@
 			}}
                {\endlist}
 \newcommand*\ergocaseslabel[1]{\hspace\labelsep
-                                \normalfont\itshape #1.}
+                                \normalfont\itshape #1}
 
 \setlength\parindent{.25in}
