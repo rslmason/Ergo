@@ -51,7 +51,7 @@
 
   	\newpage
   	\null
-	\noindent{}\begin{minipage}[l]{4in}
+	\noindent{}\fbox{\begin{minipage}[l]{4in}
 		\vskip .6in plus 0in minus 0in
 		{\LARGE \textsc{\@title}\par}%			% This sets the text of the title.
 	\vskip 10pt plus 0pt minus 0pt
@@ -64,7 +64,7 @@
 	 \par
 	%\setlength\parskip{0\p@ \@plus \p@}
 	}
-\end{minipage}
+\end{minipage}}
 \ifx\@contact\@empty\else	% does nothing if it is empty
 			\contactnote{%
 				\textbf{Contact: }\@author~<\@contact>\par
