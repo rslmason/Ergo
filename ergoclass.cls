@@ -51,8 +51,8 @@
 		\MakeUppercase{\@author}\par
 	%\vskip -5pt plus 0pt minus 0pt
 	\textit{\,\@affiliation}\par
-	\vskip 27pt plus 0pt minus 0pt
-	 \par
+%	\vskip 27pt plus 0pt minus 0pt
+%	 \par
 	%\setlength\parskip{0\p@ \@plus \p@}
 	}
 \end{minipage}
@@ -62,7 +62,9 @@
 			}
 		\fi
 
-    \thispagestyle{plain}%\@thanks
+\vskip 15pt plus 0pt minus 0pt
+
+\thispagestyle{plain}%\@thanks
   \endgroup
   \setcounter{footnote}{0}%
   \global\let\thanks\relax
