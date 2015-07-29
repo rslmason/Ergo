@@ -39,6 +39,7 @@
 %%
 \renewcommand\maketitle{
   \begingroup
+  \@makingtitletrue
     \setlength{\parskip}{0pt plus 0pt minus 0pt}
     \long\def\@makefntext##1{\parindent 1em\noindent
             \hb@xt@1.8em{%
