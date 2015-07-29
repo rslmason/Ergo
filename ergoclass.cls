@@ -53,8 +53,10 @@
 	{\Huge
 		%\lineskip 5pt plus 0pt minus 0pt
 		\MakeUppercase{\@author}\par
+	}
 	%\vskip -5pt plus 0pt minus 0pt
-	\textit{\,\@affiliation}\par
+	{\normalsize
+		\textit{\,\@affiliation}\par
 	}
 \end{minipage}
 \ifx\@contact\@empty\else	% does nothing if it is empty
