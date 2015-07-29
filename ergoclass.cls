@@ -149,7 +149,7 @@
 \renewcommand\small{\@setfontsize\small{9pt}{13pt}}				% abstract (easily changed - defined in this class)
 \renewcommand\large{\@setfontsize\large{11.5pt}{12pt}}				% subsection headings
 \renewcommand\Large{\@setfontsize\Large{12pt}{14pt}}			% section headings
-\renewcommand\LARGE{\@setfontsize\LARGE{18pt}{21pt}}			% title
+\renewcommand\LARGE{\@setfontsize\LARGE{18pt}{21.5pt}}			% title
 %\renewcommand\huge{\@setfontsize\huge{30pt}{30pt}}				%
 %\renewcommand\Huge{\@setfontsize\Huge{20pt}{20pt}}			% the article class does not use any of the
 												% huge fonts
