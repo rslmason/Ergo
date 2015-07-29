@@ -143,7 +143,7 @@
 }
 
 %% Font sizes
-\renewcommand\normalsize{\@setfontsize\normalsize{10.5pt}{13.5pt}}	% body text, figure captions, figure text, 
+\renewcommand\normalsize{\@setfontsize\normalsize{10.5pt}{14pt}}	% body text, figure captions, figure text, 
 									% header and footer text.
 \renewcommand\tiny{\@setfontsize\tiny{5.5pt}{6pt}}				% small logo font
 \renewcommand\scriptsize{\@setfontsize\scriptsize{7pt}{8.5pt}}			% nothing? (NB: Ripley's paper uses this command)
