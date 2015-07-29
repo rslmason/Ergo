@@ -160,7 +160,7 @@
 
 %% The section styles
 \renewcommand\section{\@startsection {section}{1}{\z@}%			% For all of these, we remove \bfseries from the 
-                                   {-3.5ex \@plus -1ex \@minus -.2ex}%			% style argument.
+                                   {-4.5ex \@plus -1ex \@minus -.2ex}%			% style argument.
                                    {2.3ex \@plus.2ex}%
                                    {\normalfont\Large\bfseries}}
 \renewcommand\subsection{\@startsection{subsection}{2}{\z@}%		% Here, we include \itshape (which might render 
