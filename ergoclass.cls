@@ -59,7 +59,7 @@
 			}
 		\fi
 
-\vskip 30pt plus 0pt minus 0pt
+%\vskip 30pt plus 0pt minus 0pt
 
 \thispagestyle{plain}%\@thanks
   \endgroup
