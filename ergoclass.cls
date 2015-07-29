@@ -111,7 +111,7 @@
 
 %% Non-superscript numerals for footnote text numbering
 \renewcommand\@makefntext[1]{% 
-    \parindent .2in%
+    \parindent .25in%
     \@thefnmark.~#1}%
 
 %% Header and footer for the title page
