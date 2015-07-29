@@ -41,9 +41,8 @@
 %% This changes some of the functionality of the \maketitle command.
 %%
 \renewcommand\maketitle{
-\setlength{\parskip}{5pt plus 0pt minus 0pt}
-\par
   \begingroup
+    \setlength{\parskip}{5pt plus 0pt minus 0pt}
     \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
     \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
     \long\def\@makefntext##1{\parindent 1em\noindent
@@ -63,7 +62,7 @@
 	\textit{\@affiliation}\par
 	\vskip 15pt plus 0pt minus 0pt
 	 \par
-	\setlength\parskip{0\p@ \@plus \p@}
+	%\setlength\parskip{0\p@ \@plus \p@}
 	}
 \end{minipage}
 \ifx\@contact\@empty\else	% does nothing if it is empty
