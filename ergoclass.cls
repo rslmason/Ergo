@@ -201,3 +201,11 @@
                                 \normalfont\itshape #1}
 
 \setlength\parindent{.25in}
+
+\newcommand\titlelinebreak{
+\leavevmode\unskip
+\if@makingtitle%
+\\
+\ignorespaces
+\else\fi
+}
