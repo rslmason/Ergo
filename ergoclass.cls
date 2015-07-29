@@ -45,7 +45,7 @@
 	\noindent{}\begin{minipage}[l]{4in}
 		\vskip 54pt plus 0pt minus 0pt
 		{\LARGE \textsc{\@title}\par}%			% This sets the text of the title.
-	\vskip 20pt plus 0pt minus 0pt
+	\vskip 16pt plus 0pt minus 0pt
 	{\Huge
 		%\lineskip 5pt plus 0pt minus 0pt
 		\MakeUppercase{\@author}\par
@@ -151,7 +151,7 @@
 \renewcommand\Large{\@setfontsize\Large{12pt}{14pt}}			% section headings
 \renewcommand\LARGE{\@setfontsize\LARGE{18pt}{21.5pt}}			% title
 %\renewcommand\huge{\@setfontsize\huge{10pt}{13pt}}			% The Ergo logo uses the default size of huge
-\renewcommand\Huge{\@setfontsize\Huge{10pt}{15pt}}			% the article class does not use any of the
+\renewcommand\Huge{\@setfontsize\Huge{10pt}{14pt}}			% the article class does not use any of the
 												% huge fonts
 %% The section styles
 \renewcommand\section{\@startsection {section}{1}{\z@}%			% For all of these, we remove \bfseries from the 
