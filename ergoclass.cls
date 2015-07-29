@@ -45,12 +45,12 @@
 	\noindent{}\begin{minipage}[l]{4in}
 		\vskip 54pt plus 0pt minus 0pt
 		{\LARGE \textsc{\@title}\par}%			% This sets the text of the title.
-	\vskip 16pt plus 0pt minus 0pt
+	\vskip 15.5pt plus 0pt minus 0pt
 	{\Huge
 		%\lineskip 5pt plus 0pt minus 0pt
 		\MakeUppercase{\@author}\par
 	%\vskip -5pt plus 0pt minus 0pt
-	\textit{\@affiliation}\par
+	\textit{\,\@affiliation}\par
 	\vskip 15pt plus 0pt minus 0pt
 	 \par
 	%\setlength\parskip{0\p@ \@plus \p@}
