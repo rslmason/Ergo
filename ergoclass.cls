@@ -45,9 +45,9 @@
 	\noindent{}\begin{minipage}[l]{4in}
 		\vskip 54pt plus 0pt minus 0pt
 		{\LARGE \textsc{\@title}\par}%			% This sets the text of the title.
-	\vskip 14pt plus 0pt minus 0pt
-	{\normalsize
-		\lineskip 5pt plus 0pt minus 0pt
+	\vskip 20pt plus 0pt minus 0pt
+	{\scriptsize
+		%\lineskip 5pt plus 0pt minus 0pt
 		\MakeUppercase{\@author}\par
 	\vskip -5pt plus 0pt minus 0pt
 	\textit{\@affiliation}\par
@@ -150,7 +150,7 @@
 \renewcommand\large{\@setfontsize\large{11.5pt}{12pt}}				% subsection headings
 \renewcommand\Large{\@setfontsize\Large{12pt}{14pt}}			% section headings
 \renewcommand\LARGE{\@setfontsize\LARGE{18pt}{21.5pt}}			% title
-%\renewcommand\huge{\@setfontsize\huge{30pt}{30pt}}				%
+\renewcommand\huge{\@setfontsize\huge{10pt}{13pt}}			% author
 %\renewcommand\Huge{\@setfontsize\Huge{20pt}{20pt}}			% the article class does not use any of the
 												% huge fonts
 %% The section styles
