@@ -64,6 +64,7 @@
 	\setlength\parskip{0\p@ \@plus \p@}
 	}
 \end{minipage}
+}
 
 %    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
 %    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
