@@ -52,11 +52,6 @@
 	{\normalsize
 		\lineskip 5pt plus 0pt minus 0pt
 		\MakeUppercase{\@author}\par
-		\ifx\@contact\@empty\else	% does nothing if it is empty
-			\contactnote{%
-				\textbf{Contact: }\@author~<\@contact>\par
-			}
-		\fi
 	\vskip -5pt plus 0pt minus 0pt
 	\textit{\@affiliation}\par
 	\vskip 15pt plus 0pt minus 0pt
@@ -64,6 +59,11 @@
 	\setlength\parskip{0\p@ \@plus \p@}
 	}
 \end{minipage}
+\ifx\@contact\@empty\else	% does nothing if it is empty
+	\contactnote{%
+		\textbf{Contact: }\@author~<\@contact>\par
+	}
+\fi
 }
 
 %    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
