@@ -143,7 +143,7 @@
     %{\large \@date}%
   \end{flushleft}%
   \par
-  \vskip 2.5em}						% This determines the space between the affiliation and the abstract
+  \vskip 10pt}						% This determines the space between the affiliation and the abstract
 
 %% This redefines the abstract environment to look how we want
 \renewenvironment{abstract}
