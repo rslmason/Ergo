@@ -86,7 +86,7 @@
   \item\relax
   \small}							% The font size category is determined here, although what that size is is determined below
  %{\par\normalsize\endlist}
- {\par\vskip 2pt plus 0pt minus 0pt\normalsize\endlist}				% This line returns the font size to normal and
+ {\par\vskip 8pt plus 0pt minus 0pt\normalsize\endlist}				% This line returns the font size to normal and
 								% determines the spacing between the abstract and
 								% the beginning of the body text
 % This sizes the line above the footnotes
