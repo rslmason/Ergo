@@ -144,7 +144,7 @@
   \end{flushleft}%
   \par
   %\vskip 2.5em}						% This determines the space between the affiliation and the abstract
-  \vskip 30pt}
+  \vskip 28pt}
 
 %% This redefines the abstract environment to look how we want
 \renewenvironment{abstract}
