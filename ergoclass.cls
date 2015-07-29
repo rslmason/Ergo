@@ -38,113 +38,86 @@
 \contact{}
 \author{}
 
-%% This changes some of the functionality of the \maketitle and associated \@maketitle commands.
-%% The article class normally wipes the author, title, and other fields after the title page is made. 
-%% This is presumably done for the sake of stability (it also undefines the commands for setting the 
-%% title and author). However, we want access to some of the %% fields in order to fill out other
-%% parts of the article, so we change a few lines.
+%% This changes some of the functionality of the \maketitle command.
 %%
-\if@titlepage
-  \renewcommand\maketitle{\begin{titlepage}%
-  \let\footnotesize\small
-  \let\footnoterule\relax
-  \let \footnote \thanks
-  \null\vfil
-  \vskip 60\p@
-  \begin{center}%
-    {\LARGE \@title \par}%
-    \vskip 3em%
-    {\large
-     \lineskip .75em%
-      \begin{tabular}[t]{c}%
-        \@author
-      \end{tabular}\par}%
-      \vskip 1.5em%
-    {\large \@date \par}%       % Set date in \large size. %(comment from article.cls)
-  \end{center}\par
-  \@thanks
-  \vfil\null
-  \end{titlepage}%
-  \setcounter{footnote}{0}%
-  \global\let\thanks\relax
-  \global\let\maketitle\relax
-  \global\let\@thanks\@empty
-  %\global\let\@author\@empty  % We knock this out in order to be able to use the author field in the headers and footers
-  \global\let\@date\@empty
-  %\global\let\@title\@empty
-  \global\let\title\relax
-  \global\let\author\relax
-  \global\let\date\relax
-  \global\let\and\relax
-}
-\else
-\renewcommand\maketitle{\par % Renew -- rm
-  \begingroup
-    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
-    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
-    \long\def\@makefntext##1{\parindent 1em\noindent
-            \hb@xt@1.8em{%
-                \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
-    \if@twocolumn
-      \ifnum \col@number=\@ne
-        \@maketitle
-      \else
-        \twocolumn[\@maketitle]%
-      \fi
-    \else
-      \newpage
-      \global\@topnum\z@   % Prevents figures from going at top of page. %(comment from article.cls)
-      \@maketitle
-    \fi
-    \thispagestyle{plain}\@thanks
-  \endgroup
-  \setcounter{footnote}{0}%
-  \global\let\thanks\relax
-  \global\let\maketitle\relax
-  \global\let\@maketitle\relax
-  \global\let\@thanks\@empty
-  %\global\let\@author\@empty	% We knock this out to get access to this field throughout the article
-  \global\let\@date\@empty
-  %\global\let\@title\@empty	% We knock this out to get access to this field throughout the article
-  \global\let\title\relax
-  \global\let\author\relax
-  \global\let\date\relax
-  \global\let\and\relax
-}
+\renewcommand{\maketitle}%
+{%
+	\setlength{\parskip}{5pt plus 0pt minus 0pt}
+  	\newpage
+  	\null
+	\noindent{}\begin{minipage}[l]{4in}
+		\vskip .6in plus 0in minus 0in
+		{\LARGE \textsc{\@title}\par}%			% This sets the text of the title.
+	\vskip 10pt plus 0pt minus 0pt
+	{\normalsize
+		\lineskip 5pt plus 0pt minus 0pt
+		\MakeUppercase{\@author}\par
+		\ifx\@contact\@empty\else	% does nothing if it is empty
+			\contactnote{%
+				\textbf{Contact: }\@author~<\@contact>\par
+			}
+		\fi
+	\vskip -5pt plus 0pt minus 0pt
+	\textit{\@affiliation}\par
+	\vskip 15pt plus 0pt minus 0pt
+	 \par
+	\setlength\parskip{0\p@ \@plus \p@}
+	}
+\end{minipage}
+
+%    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+%    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
+%    \long\def\@makefntext##1{\parindent 1em\noindent
+%            \hb@xt@1.8em{%
+%                \hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
+%  \thispagestyle{plain}\@thanks
+%  \setcounter{footnote}{0}%
+%  \global\let\thanks\relax
+%  \global\let\maketitle\relax
+%  \global\let\@maketitle\relax
+%  \global\let\@thanks\@empty
+%  %\global\let\@author\@empty	% We knock this out to get access to this field throughout the article
+%  \global\let\@date\@empty
+%  %\global\let\@title\@empty	% We knock this out to get access to this field throughout the article
+%  \global\let\title\relax
+%  \global\let\author\relax
+%  \global\let\date\relax
+%  \global\let\and\relax
+%}
 %% This is the command which actually typesets the titlepage, so we can change this to fine-tune 
 %% the placement of the title block and its internal spacing. 
 %%
 %% However, it is important to keep in mind that the baselineskip of the font sizes in the title will also
 %% affect the spacing between lines.
 %%
-\renewcommand{\@maketitle}{%
-  \newpage
-  \null
-  \vskip .55in%					% This length determines how far down the page the title block starts
-  \begin{flushleft}%
-%  \let \footnote \thanks%			% Ergo does not use the \thanks footnote for acknowledgements.
-\list{}{\setlength\leftmargin{0in}\setlength\rightmargin{1in}}
-    {\LARGE \textsc{\@title}\par}%			% This sets the text of the title.
-    \endlist
-\vskip 1em%					% This determines the space between the title and the author's name.
-    {\normalsize
-      \lineskip .5em%
-      %\begin{tabular}[t]{c}%
-        \MakeUppercase{\@author}\par%		% This sets the author's name
-\ifx\@contact\@empty\else%
-  \contactnote{%					% This command sets the contact note, unless the author leaves \contact{} empty
-  \textbf{Contact: }\@author~<\@contact>\par
-}\fi
-	\vskip -.5em%				% This determines the distance betweent the author and the affiliation
-       \textit{\@affiliation}\par
-      %\end{tabular}\par}%
-	}
-    %\vskip 1em%
-    %{\large \@date}%
-  \end{flushleft}%
-  \par
-  %\vskip 2.5em}						% This determines the space between the affiliation and the abstract
-  \vskip 28pt}
+%\renewcommand{\@maketitle}{%
+%  \newpage
+%  \null
+%  \vskip .55in%					% This length determines how far down the page the title block starts
+%  \begin{flushleft}%
+%%  \let \footnote \thanks%			% Ergo does not use the \thanks footnote for acknowledgements.
+%\list{}{\setlength\leftmargin{0in}\setlength\rightmargin{1in}}
+%    {\LARGE \textsc{\@title}\par}%			% This sets the text of the title.
+%    \endlist
+%\vskip 1em%					% This determines the space between the title and the author's name.
+%    {\normalsize
+%      \lineskip .5em%
+%      %\begin{tabular}[t]{c}%
+%        \MakeUppercase{\@author}\par%		% This sets the author's name
+%\ifx\@contact\@empty\else%
+%  \contactnote{%					% This command sets the contact note, unless the author leaves %\contact{} empty
+%  \textbf{Contact: }\@author~<\@contact>\par
+%}\fi
+%	\vskip -.5em%				% This determines the distance betweent the author and the affiliation
+%       \textit{\@affiliation}\par
+%      %\end{tabular}\par}%
+%	}
+%    %\vskip 1em%
+%    %{\large \@date}%
+%  \end{flushleft}%
+%  \par
+%  %\vskip 2.5em}						% This determines the space between the affiliation and the %abstract
+%  \vskip 28pt}
 
 %% This redefines the abstract environment to look how we want
 \renewenvironment{abstract}
@@ -154,7 +127,7 @@
   }
   \item\relax
   \small}							% The font size category is determined here, although what that size is is determined below
- {\par\normalsize\endlist\vskip 24pt}				% This line returns the font size to normal and
+ {\par\normalsize\endlist\vskip 24pt plus 0pt minus 0pt}				% This line returns the font size to normal and
 								% determines the spacing between the abstract and
 								% the beginning of the body text
 % This sizes the line above the footnotes
