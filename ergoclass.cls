@@ -194,7 +194,7 @@
   \fi
   \vskip\belowcaptionskip}
 
-\renewenvironment{ergodescription}[1][]%
+\newenvironment{ergodescription}[1][]%
                {
 		\ifx#1\@empty\else
 			\null\par\textbf{#1}
