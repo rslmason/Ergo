@@ -34,7 +34,6 @@
 \newcommand*{\articledoi}[1]{\gdef\@doi{#1}}
 \articledoi{}
 \newcommand*{\volumeissueyear}[3]{\gdef\@volume{#1}\gdef\@issue{#2}\gdef\@year{#3}}
-\ClassWarning{ergoclass}{The \protect\volumeissueyear\space command needs three arguments}
 \volumeissueyear{}{}{}
 \newcommand*{\contact}[1]{\gdef\@contact{#1}}
 \contact{}
@@ -142,7 +141,7 @@
 %% The logo in the header of the title page
 \newcommand{\ergo}{%
 {\huge{\textbf{Ergo}}}
-{\tiny JOURNAL OF PHILOSOPHY \kern-75.5pt \raisebox{5.8pt}{AN OPEN ACCESS}}
+{\tiny JOURNAL OF PHILOSOPHY \kern-75.75pt \raisebox{5.8pt}{AN OPEN ACCESS}}
 %{\tiny \kern-1pt JOURNAL OF PHILOSOPHY \kern-74pt \raisebox{6pt}{AN OPEN ACCESS}}
 }
 
