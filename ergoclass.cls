@@ -18,6 +18,8 @@
 \RequirePackage[authoryear]{natbib}
 \RequirePackage{lettrine}
 	\renewcommand{\DefaultLoversize}{0.3}
+\RequirePackage{graphicx}
+	\newcommand{\headerdot}{\raisebox{-2pt}[0pt][0pt]{\resizebox{6pt}{9pt}{$\cdot$}}}
 
 %% This sets up the layout of the document
 %% headsep determines how far above the body text the header sits
@@ -127,9 +129,9 @@
 %% Header and footer for the non-title pages
 \pagestyle{fancy}
 \fancyhead{}
-\fancyhead[LE]{\raisebox{-3pt}[0pt][0pt]{\thepage\quad$\cdot$\quad\textit{\@author}}}
-\fancyhead[RO]{\raisebox{-3pt}[0pt][0pt]{\textit{\@title}\quad$\cdot$\quad\thepage}}
-\cfoot{\textit{Ergo} $\cdot$ \textit{vol. \@volume, no. \@issue} $\cdot$ \textit{\@year}}
+\fancyhead[LE]{\raisebox{-3pt}[0pt][0pt]{\thepage\quad$\headerdot$\quad\textit{\@author}}}
+\fancyhead[RO]{\raisebox{-3pt}[0pt][0pt]{\textit{\@title}\quad$\headerdot$\quad\thepage}}
+\cfoot{\textit{Ergo} $\headerdot$ \textit{vol. \@volume, no. \@issue} $\headerdot$ \textit{\@year}}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
