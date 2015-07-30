@@ -53,7 +53,7 @@
 	\noindent{}\begin{minipage}[l]{4in}
 		\vskip 53.3pt plus 0pt minus 0pt
 		{\LARGE \textsc{\@title}\par}%			% This sets the text of the title.
-	\vskip 15.5pt plus 0pt minus 0pt
+	\vskip 15pt plus 0pt minus 0pt
 	{\Huge
 		%\lineskip 5pt plus 0pt minus 0pt
 		\MakeUppercase{\@author}\par
