@@ -161,7 +161,7 @@
 \renewcommand\small{\@setfontsize\small{9pt}{13pt}}				% abstract (easily changed - defined in this class)
 \renewcommand\large{\@setfontsize\large{11.5pt}{12pt}}				% subsection and subsubsection headings
 \renewcommand\Large{\@setfontsize\Large{12pt}{14pt}}			% section headings
-\renewcommand\LARGE{\@setfontsize\LARGE{18pt}{22.5pt}}			% title
+\renewcommand\LARGE{\@setfontsize\LARGE{18pt}{22pt}}			% title
 %\renewcommand\huge{\@setfontsize\huge{10pt}{13pt}}			% The Ergo logo uses the default size of huge
 \renewcommand\Huge{\@setfontsize\Huge{9.5pt}{13.5pt}}			% This is used for the author name
 
