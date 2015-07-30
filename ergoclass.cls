@@ -141,7 +141,7 @@
 %% The logo in the header of the title page
 \newcommand{\ergo}{%
 {\huge{\textbf{Ergo}}}
-{\tiny JOURNAL OF PHILOSOPHY \kern-76.15pt \raisebox{5.8pt}{AN OPEN ACCESS}}
+{\tiny JOURNAL OF PHILOSOPHY \kern-76.25pt \raisebox{5.8pt}{AN OPEN ACCESS}}
 %{\tiny \kern-1pt JOURNAL OF PHILOSOPHY \kern-74pt \raisebox{6pt}{AN OPEN ACCESS}}
 }
 
