@@ -56,21 +56,32 @@
 		\vskip 53.3pt plus 0pt minus 0pt
 		{\LARGE \textsc{\@title}\par}%			% This sets the text of the title.
 	\vskip 15pt plus 0pt minus 0pt
-	{\Huge
-		%\lineskip 5pt plus 0pt minus 0pt
-		\MakeUppercase{\@author}\par
-	}
-	%\vskip -5pt plus 0pt minus 0pt
-	{\normalsize
-		\textit{\,\@affiliation}\par
-	}
+	\if@multiauthor{
+		{\Huge\MakeUppercase{\@author}\par}
+		{\normalsize\textit{\@affiliation}\par}
+		\vskip 14pt plus 0pt minus 0pt
+		{\Huge\MakeUppercase{\@authortwo}\par}
+		{\normalsize\textit{\@affiliationtwo}\par}
+		\ifx\@authorthree\@empty\else{
+		\vskip 14pt plus 0pt minus 0pt
+		{\Huge\MakeUppercase{\@authorthree}\par}
+		{\normalsize\textit{\@affiliationthree}\par}
+		}\fi}
+	\else{
+		{\Huge\MakeUppercase{\@author}\par	}
+		{\normalsize\textit{\@affiliation}\par}
+	}\fi
 \end{minipage}
-\ifx\@contact\@empty\else	% does nothing if it is empty
+	\if@multiauthor{%
+		\ifx\@multiauthorcontact\@empty\else\contactnote{\@multiauthorcontact}\fi
+		}
+	\else{
+		\ifx\@contact\@empty\else	% does nothing if it is empty
 			\contactnote{%
 				\textbf{Contact: }\@author~<\@contact>
 			}
 		\fi
-
+	}\fi
 \vskip 30pt plus 0pt minus 0pt
 
 \thispagestyle{plain}%\@thanks
@@ -223,4 +234,49 @@
 \\
 \ignorespaces
 \else\fi
+}
+
+\newif\if@multiauthor\@multiauthorfalse
+
+\newcommand{\multiauthor}[9]{%
+\@multiauthortrue
+\gdef\@author{#1}	
+\gdef\@affiliation{#2}	
+\gdef\@contact{#3}	
+\gdef\@authortwo{#4}
+\gdef\@affiliationtwo{#5}
+\gdef\@contacttwo{#6}
+\gdef\@authorthree{#7}
+\gdef\@affiliationthree{#8}
+\gdef\@contactthree{#9}
+\gdef\@contact@one{\@author~<\@contact>}
+\gdef\@contact@two{\@authortwo~<\@contacttwo>}
+\gdef\@contact@three{\@authorthree~<\@contactthree>}
+
+\newcommand\@contactbuild[1]{
+\g@addto@macro\@multiauthorcontact{##1}
+}
+
+\gdef\@multiauthorcontact{\textbf{Contact: }}
+\ifx\@contact\@empty{
+	\ifx\@contacttwo\@empty{
+		\ifx\@contactthree\@empty{\gdef\@multiauthorcontact{}}%all empty
+		\else{\@contactbuild{\@contact@three}}	% three full
+		\fi}
+	\else{\@contactbuild{\@contact@two}
+		\ifx\@contactthree\@empty{}
+		\else{\@contactbuild{, \@contact@three}}% 
+		\fi}
+	\fi}
+\else{\@contactbuild{\@contact@one}
+	\ifx\@contacttwo\@empty{
+		\ifx\@contactthree\@empty{}% one full
+		\else{\@contactbuild{, \@contact@three}}	% one full, three full
+		\fi}
+	\else{\@contactbuild{, \@contact@two}
+		\ifx\@contactthree\@empty{}			%one, two
+		\else{\@contactbuild{, \@contact@three}}  	%one, two, three
+		\fi}
+	\fi}
+\fi
 }
