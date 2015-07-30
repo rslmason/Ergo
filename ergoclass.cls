@@ -19,7 +19,8 @@
 \RequirePackage{lettrine}
 	\renewcommand{\DefaultLoversize}{0.3}
 \RequirePackage{graphicx}
-	\newcommand{\headerdot}{\raisebox{-2pt}[0pt][0pt]{\resizebox{6pt}{9pt}{$\cdot$}}}
+	\newcommand{\headerdot}{\raisebox{-1.5pt}[0pt][0pt]{\resizebox{6pt}{9pt}{$\cdot$}}}
+	\newcommand{\footerdot}{\raisebox{-3pt}[0pt][0pt]{\resizebox{6pt}{9pt}{$\cdot$}}}
 
 %% This sets up the layout of the document
 %% headsep determines how far above the body text the header sits
@@ -131,7 +132,7 @@
 \fancyhead{}
 \fancyhead[LE]{\raisebox{-3pt}[0pt][0pt]{\thepage\quad$\headerdot$\quad\textit{\@author}}}
 \fancyhead[RO]{\raisebox{-3pt}[0pt][0pt]{\textit{\@title}\quad$\headerdot$\quad\thepage}}
-\cfoot{\textit{Ergo} $\headerdot$ \textit{vol. \@volume, no. \@issue} $\headerdot$ \textit{\@year}}
+\cfoot{\textit{Ergo} $\footerdot$ \textit{vol. \@volume, no. \@issue} $\footerdot$ \textit{\@year}}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
