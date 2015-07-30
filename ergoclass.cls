@@ -38,6 +38,8 @@
 \newcommand*{\contact}[1]{\gdef\@contact{#1}}
 \contact{}
 \author{}
+\newcommand{\textofabstract}[1]{\gdef\@textofabstract{#1}}
+\textofabstract{}
 
 %% This changes some of the functionality of the \maketitle command.
 %%
@@ -85,6 +87,8 @@
   \global\let\author\relax
   \global\let\date\relax
   \global\let\and\relax
+ 
+ \begin{abstract}\@textofabstract\end{abstract}
 }
 
 %% This redefines the abstract environment to look how we want
