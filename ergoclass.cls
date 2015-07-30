@@ -12,7 +12,7 @@
 
 \RequirePackage[T1]{fontenc}
 \RequirePackage{fancyhdr}
-\RequirePackage{mathpazo}
+\RequirePackage[osf]{mathpazo}
 %\RequirePackage{kpfonts}
 \RequirePackage[tracking=alltext, letterspace=16]{microtype}
 \RequirePackage[authoryear]{natbib}
