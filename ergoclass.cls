@@ -11,6 +11,7 @@
 \LoadClass[11pt, twoside]{article}
 
 \RequirePackage[T1]{fontenc}
+\RequirePackage{textcomp}
 \RequirePackage{fancyhdr}
 \RequirePackage[osf]{mathpazo}
 %\RequirePackage{kpfonts}
