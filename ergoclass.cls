@@ -67,7 +67,7 @@
 \end{minipage}
 \ifx\@contact\@empty\else	% does nothing if it is empty
 			\contactnote{%
-				\textbf{Contact: }\@author~<\@contact>\par
+				\textbf{Contact: }\@author~<\@contact>
 			}
 		\fi
 
