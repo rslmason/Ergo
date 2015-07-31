@@ -13,6 +13,7 @@
 \RequirePackage[T1]{fontenc}
 \RequirePackage{textcomp}
 \RequirePackage[hyperfootnotes=false]{hyperref}
+	\urlstyle{rm}
 \RequirePackage{fancyhdr}
 \RequirePackage[osf]{mathpazo}
 %\RequirePackage{kpfonts}
