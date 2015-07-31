@@ -146,10 +146,17 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}}
 
+\newcommand{\@authorheader}{%
+	\if@multiauthor{
+		\ifx\@authorthree\@empty{\@author{} and \@authortwo{}}
+		\else{\@author{}, \@authortwo{}, and \@authorthree{}}
+		\fi}
+	\else{\@author}
+	\fi}
 %% Header and footer for the non-title pages
 \pagestyle{fancy}
 \fancyhead{}
-\fancyhead[LE]{\raisebox{-3pt}[0pt][0pt]{\thepage\quad$\headerdot$\quad\textit{\@author}}}
+\fancyhead[LE]{\raisebox{-3pt}[0pt][0pt]{\thepage\quad$\headerdot$\quad\textit{\@authorheader}}}
 \fancyhead[RO]{\raisebox{-3pt}[0pt][0pt]{\textit{\@title}\quad$\headerdot$\quad\thepage}}
 \cfoot{\textit{Ergo} $\footerdot$ \textit{vol. \@volume, no. \@issue} $\footerdot$ \textit{\@year}}
 \renewcommand{\headrulewidth}{0pt}
