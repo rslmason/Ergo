@@ -12,7 +12,7 @@
 
 \RequirePackage[T1]{fontenc}
 \RequirePackage{textcomp}
-\RequirePackage{hyperref}
+\RequirePackage[hyperfootnotes=false]{hyperref}
 \RequirePackage{fancyhdr}
 \RequirePackage[osf]{mathpazo}
 %\RequirePackage{kpfonts}
