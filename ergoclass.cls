@@ -16,7 +16,7 @@
 \RequirePackage{fancyhdr}
 \RequirePackage[osf]{mathpazo}
 %\RequirePackage{kpfonts}
-\RequirePackage[tracking=alltext, letterspace=16]{microtype}
+\RequirePackage[tracking=alltext, letterspace=20]{microtype}
 \RequirePackage[authoryear]{natbib}
 \RequirePackage{lettrine}
 	\renewcommand{\DefaultLoversize}{0.3}
